@@ -1,0 +1,282 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f2f2f7;
+  --foreground: #1d1d1f;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, var(--font-inter), "Inter", sans-serif;
+  text-rendering: geometricPrecision;
+}
+
+button,
+a,
+input,
+select {
+  outline-color: #14b8a6;
+}
+
+.scan-grid {
+  background-image:
+    linear-gradient(rgba(20, 184, 166, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 184, 166, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.h-hero {
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.h-section {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.body-lg {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #6e6e73;
+}
+
+.apple-card {
+  border: 1px solid #e5e5ea;
+  background: #ffffff;
+  box-shadow: none;
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out, border-color 200ms ease-out;
+}
+
+.apple-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.hologram-shell {
+  background: radial-gradient(ellipse at center, #0a1628 0%, #020508 100%);
+  box-shadow: inset 0 0 80px rgba(0, 229, 255, 0.08), 0 24px 80px rgba(2, 5, 8, 0.18);
+}
+
+.hologram-floor {
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.1) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to top, black, transparent);
+  transform: perspective(360px) rotateX(58deg);
+  transform-origin: bottom center;
+}
+
+@keyframes scan {
+  0% {
+    top: 10%;
+    opacity: 0;
+  }
+  10%,
+  90% {
+    opacity: 0.65;
+  }
+  100% {
+    top: 90%;
+    opacity: 0;
+  }
+}
+
+.scan-line {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  z-index: 20;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00e5ff, transparent);
+  animation: scan 3s ease-in-out infinite;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.72);
+}
+
+.hologram-tag {
+  --tag-color: #00e5ff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  border: 1px solid color-mix(in srgb, var(--tag-color), transparent 55%);
+  border-radius: 999px;
+  background: rgba(2, 5, 8, 0.76);
+  padding: 8px 11px;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 0 22px color-mix(in srgb, var(--tag-color), transparent 78%);
+  backdrop-filter: blur(12px);
+  transition: transform 180ms ease-out, border-color 180ms ease-out, box-shadow 180ms ease-out;
+}
+
+.hologram-tag:hover,
+.hologram-tag-active {
+  transform: translateY(-2px) scale(1.03);
+  border-color: var(--tag-color);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--tag-color), transparent 58%);
+}
+
+.hologram-tag:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 3px;
+}
+
+@keyframes dotPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.55);
+    opacity: 1;
+  }
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--tag-color);
+  box-shadow: 0 0 14px var(--tag-color);
+  animation: dotPulse 1.6s ease-out infinite;
+}
+
+@keyframes anatomyAlertPulse {
+  0%,
+  100% {
+    opacity: 0.84;
+    stroke-opacity: 0.72;
+  }
+  50% {
+    opacity: 1;
+    stroke-opacity: 1;
+  }
+}
+
+.anatomy-alert {
+  animation: anatomyAlertPulse 1.45s ease-in-out infinite;
+}
+
+@keyframes shimmerBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.shimmer-cta {
+  position: relative;
+  isolation: isolate;
+}
+
+.shimmer-cta::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #0f766e, #00e5ff, #14b8a6, #0f766e);
+  background-size: 200% 100%;
+  animation: shimmerBorder 3s ease-out infinite;
+}
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #ececf1 25%, #f7f7fa 37%, #ececf1 63%);
+  background-size: 400% 100%;
+  animation: skeletonShimmer 1.25s ease-out infinite;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (max-width: 640px) {
+  .h-hero {
+    font-size: 44px;
+    line-height: 1.06;
+    letter-spacing: 0;
+  }
+
+  .h-section {
+    font-size: 32px;
+    line-height: 1.12;
+    letter-spacing: 0;
+  }
+
+  .body-lg {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .hologram-tag {
+    max-width: 138px;
+    gap: 6px;
+    white-space: normal;
+    padding: 7px 9px;
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .pulse-dot {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 auto;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-card {
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+    break-inside: avoid;
+  }
+}
