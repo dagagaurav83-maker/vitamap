@@ -9,37 +9,37 @@ type VitaMapProps = {
   compact?: boolean;
 };
 
-type AnatomyOrgan = {
+type AttentionOrgan = {
   id: string;
   label: string;
-  marker?: string;
+  marker: string;
   status: StatusColor;
-  callout?: { x: string; y: string; align: "left" | "right" };
+  callout: { x: string; y: string; align: "left" | "right" };
 };
 
-const attentionOrgans: AnatomyOrgan[] = ([
+const attentionOrgans: AttentionOrgan[] = ([
   {
     id: "heart",
     label: "Heart",
     marker: "High cholesterol",
     status: memberData.organStatus.heart,
-    callout: { x: "9%", y: "37%", align: "left" },
+    callout: { x: "12%", y: "36%", align: "left" },
   },
   {
     id: "pancreas",
     label: "Pancreas",
     marker: "Blood sugar watch",
     status: memberData.organStatus.pancreas,
-    callout: { x: "58%", y: "50%", align: "right" },
+    callout: { x: "59%", y: "49%", align: "right" },
   },
   {
     id: "bones",
     label: "Bones",
     marker: "Low Vitamin D",
     status: memberData.organStatus.bones,
-    callout: { x: "50%", y: "67%", align: "right" },
+    callout: { x: "54%", y: "69%", align: "right" },
   },
-] satisfies AnatomyOrgan[]).filter((organ) => organ.status !== "green");
+] satisfies AttentionOrgan[]).filter((organ) => organ.status !== "green");
 
 function statusFill(status: StatusColor) {
   return statusStyles[status].fill;
@@ -51,33 +51,34 @@ function isActive(id: string, selectedOrgan: string | null) {
 
 export function VitaMap({ selectedOrgan, onSelect, compact = false }: VitaMapProps) {
   const shellHeightClass = compact
-    ? "min-h-[420px] sm:min-h-[480px]"
-    : "min-h-[560px] sm:min-h-[620px] lg:min-h-[680px]";
+    ? "min-h-[470px] sm:min-h-[520px]"
+    : "min-h-[640px] sm:min-h-[680px] lg:min-h-[720px]";
 
   return (
     <section
-      className={`hologram-shell relative overflow-hidden rounded-2xl border border-cyan-300/10 bg-[#050A18] text-white sm:rounded-[20px] ${shellHeightClass}`}
+      className={`relative overflow-hidden rounded-2xl border border-[#E5E5EA] bg-white text-[#1D1D1F] shadow-[0_24px_80px_rgba(15,23,42,0.08)] sm:rounded-[20px] ${shellHeightClass}`}
       aria-label="VitaMap body map"
     >
-      <div className="scan-line" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-40 hologram-floor" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(20,184,166,0.18),transparent_34%),linear-gradient(180deg,rgba(15,23,42,0)_0%,rgba(2,6,23,0.42)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#FFFFFF_0%,#F8FAFC_100%)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#FF3B30] via-[#FF9F0A] to-[#30D158]" />
 
       <div className="absolute left-4 top-4 z-20 sm:left-5 sm:top-5">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-200 sm:text-xs sm:tracking-[0.18em]">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#0F766E] sm:text-xs sm:tracking-[0.18em]">
           VitaMap body scan
         </p>
-        <h2 className="mt-1 text-xl font-semibold tracking-tight sm:text-2xl">Anatomy report map</h2>
-        <p className="mt-1 max-w-[210px] text-xs leading-5 text-cyan-100/70 sm:max-w-none">
-          Major internal organs shown in their natural body position. Only organs needing attention are highlighted.
+        <h2 className="mt-1 text-xl font-semibold tracking-tight text-[#1D1D1F] sm:text-2xl">
+          Anatomy report map
+        </h2>
+        <p className="mt-1 max-w-[240px] text-xs leading-5 text-[#6E6E73] sm:max-w-[360px]">
+          Full-body organ map. Healthy areas stay soft; only organs that need attention are highlighted.
         </p>
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="absolute inset-0 z-10 flex items-end justify-center px-2 pb-14 pt-28 sm:px-8 sm:pb-16 sm:pt-24"
+        transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className="absolute inset-0 z-10 flex items-center justify-center px-0 pb-[76px] pt-[116px] sm:items-end sm:px-8 sm:pb-16 sm:pt-24"
       >
         <AnatomySvg selectedOrgan={selectedOrgan} onSelect={onSelect} />
       </motion.div>
@@ -91,10 +92,10 @@ export function VitaMap({ selectedOrgan, onSelect, compact = false }: VitaMapPro
             onClick={() => onSelect(organ.id)}
             className={`hologram-tag absolute z-30 ${active ? "hologram-tag-active" : ""}`}
             style={{
-              left: organ.callout?.x,
-              top: organ.callout?.y,
+              left: organ.callout.x,
+              top: organ.callout.y,
               ["--tag-color" as string]: statusFill(organ.status),
-              transform: organ.callout?.align === "right" ? "translateX(-8%)" : undefined,
+              transform: organ.callout.align === "right" ? "translateX(-8%)" : undefined,
             }}
             aria-label={`Open ${organ.label} report details`}
           >
@@ -106,14 +107,13 @@ export function VitaMap({ selectedOrgan, onSelect, compact = false }: VitaMapPro
 
       <div className="absolute bottom-4 left-4 right-4 z-20 flex flex-wrap gap-2 text-[11px] sm:bottom-5 sm:left-5 sm:right-5 sm:text-xs">
         {(["red", "yellow"] as StatusColor[]).map((status) => (
-          <span key={status} className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-slate-100 backdrop-blur">
+          <span key={status} className="rounded-full border border-[#E5E5EA] bg-white/90 px-3 py-1 text-[#1D1D1F] shadow-sm">
             <span className="mr-2 inline-block size-2 rounded-full" style={{ background: statusFill(status) }} />
             {statusStyles[status].label}
           </span>
         ))}
-        <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-slate-100 backdrop-blur">
-          <span className="mr-2 inline-block size-2 rounded-full bg-slate-300" />
-          Normal organs muted
+        <span className="rounded-full border border-[#E5E5EA] bg-white/90 px-3 py-1 text-[#6E6E73] shadow-sm">
+          Healthy organs muted
         </span>
       </div>
     </section>
@@ -121,170 +121,218 @@ export function VitaMap({ selectedOrgan, onSelect, compact = false }: VitaMapPro
 }
 
 function AnatomySvg({ selectedOrgan, onSelect }: Pick<VitaMapProps, "selectedOrgan" | "onSelect">) {
-  const heartStatus = memberData.organStatus.heart;
-  const pancreasStatus = memberData.organStatus.pancreas;
-  const bonesStatus = memberData.organStatus.bones;
-
   return (
     <svg
-      viewBox="0 0 360 680"
+      viewBox="0 0 420 760"
       role="img"
-      aria-label="Front-view human body anatomy map with heart, lungs, liver, stomach, pancreas, kidneys, intestines, bladder, spine, ribs, pelvis and leg bones"
-      className="h-full max-h-[560px] w-full max-w-[430px] drop-shadow-[0_0_42px_rgba(34,211,238,0.16)]"
+      aria-label="Front-view human body anatomy illustration with skeleton, brain, lungs, heart, liver, stomach, pancreas, kidneys, intestines, bladder and pelvis"
+      className="h-auto w-[210px] max-w-full sm:h-full sm:max-h-[650px] sm:w-full sm:max-w-[470px]"
     >
       <defs>
-        <filter id="redGlow" x="-80%" y="-80%" width="260%" height="260%">
-          <feGaussianBlur stdDeviation="7" result="blur" />
+        <filter id="medicalRedGlow" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="6" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
-        <filter id="yellowGlow" x="-80%" y="-80%" width="260%" height="260%">
+        <filter id="medicalYellowGlow" x="-80%" y="-80%" width="260%" height="260%">
           <feGaussianBlur stdDeviation="5" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
-        <linearGradient id="bodyGlass" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stopColor="#DFFBFF" stopOpacity="0.28" />
-          <stop offset="100%" stopColor="#A7F3D0" stopOpacity="0.16" />
+        <linearGradient id="skinTone" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stopColor="#FFD8C9" />
+          <stop offset="100%" stopColor="#F4A99A" />
         </linearGradient>
-        <linearGradient id="neutralOrgan" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stopColor="#E2E8F0" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#94A3B8" stopOpacity="0.72" />
+        <linearGradient id="softOrgan" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stopColor="#F6B5A8" />
+          <stop offset="100%" stopColor="#D88481" />
         </linearGradient>
       </defs>
 
-      <g opacity="0.72">
-        <path
-          d="M180 22c31 0 53 24 53 55 0 29-21 54-53 54s-53-25-53-54c0-31 22-55 53-55Z"
-          fill="url(#bodyGlass)"
-          stroke="#A5F3FC"
-          strokeOpacity="0.38"
-          strokeWidth="2"
-        />
-        <path
-          d="M129 132c-34 17-54 55-60 108L43 402c-3 18 9 34 27 37l6 1 35-176 20-62v124l-15 114-8 178c-1 22 14 39 34 39h2c17 0 31-13 33-31l19-162h8l19 162c2 18 16 31 33 31h2c20 0 35-17 34-39l-8-178-15-114V202l20 62 35 176 6-1c18-3 30-19 27-37l-26-162c-6-53-26-91-60-108-24-12-41-14-64-14h-48c-23 0-40 2-64 14Z"
-          fill="url(#bodyGlass)"
-          stroke="#A5F3FC"
-          strokeOpacity="0.34"
-          strokeWidth="2"
-        />
-      </g>
+      <BodySilhouette />
+      <SkeletonLayer selectedOrgan={selectedOrgan} onSelect={onSelect} />
 
-      <g opacity="0.48" stroke="#E0F2FE" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M180 128v470" strokeWidth="6" />
-        <path d="M127 202c26 12 80 12 106 0" strokeWidth="4" fill="none" />
-        <path d="M121 224c34 18 84 18 118 0" strokeWidth="4" fill="none" />
-        <path d="M118 249c40 20 84 20 124 0" strokeWidth="4" fill="none" />
-        <path d="M138 457c26 19 58 19 84 0" strokeWidth="7" fill="none" />
-      </g>
-
-      <AnatomyButton
+      <OrganButton
         id="brain"
         label="Brain"
         selected={selectedOrgan === "brain"}
         onSelect={onSelect}
-        path="M154 63c0-17 12-30 28-30 16 0 28 13 28 30 10 5 17 17 15 30-2 18-18 30-37 30h-16c-19 0-35-12-37-30-2-13 5-25 19-30Z"
+        fill="#F4A0B7"
+        path="M174 50c8-16 27-24 43-15 16-9 36-1 43 15 15 2 26 15 26 31 0 19-15 34-34 34h-84c-19 0-34-15-34-34 0-16 11-29 40-31Z"
       />
-      <AnatomyButton
+
+      <OrganButton
         id="thyroid"
         label="Thyroid"
         selected={selectedOrgan === "thyroid"}
         onSelect={onSelect}
-        path="M164 142c8 8 24 8 32 0 7 9 5 24-4 29-7 4-17 4-24 0-9-5-11-20-4-29Z"
+        fill="#D9A17E"
+        path="M190 151c9 9 31 9 40 0 8 8 7 26-5 34-8 6-23 6-31 0-12-8-13-26-4-34Z"
       />
-      <AnatomyButton
+
+      <OrganButton
         id="lungs"
         label="Lungs"
         selected={selectedOrgan === "lungs"}
         onSelect={onSelect}
-        path="M174 183c-25-27-55-18-67 12-13 32-10 86 9 108 18 21 51 3 58-37V183Zm12 0v83c7 40 40 58 58 37 19-22 22-76 9-108-12-30-42-39-67-12Z"
+        fill="#EC7C74"
+        path="M205 207c-34-35-74-23-92 18-20 45-15 116 10 145 25 29 69 8 80-45 5-27 3-75 2-118Zm10 0c-1 43-3 91 2 118 11 53 55 74 80 45 25-29 30-100 10-145-18-41-58-53-92-18Z"
       />
 
-      <AnatomyButton
+      <OrganButton
         id="heart"
         label="Heart"
         selected={selectedOrgan === "heart"}
         onSelect={onSelect}
-        status={heartStatus}
-        path="M174 241c-18-22-52-9-52 20 0 35 39 52 58 82 19-30 58-47 58-82 0-29-34-42-52-20l-6 8-6-8Z"
+        status={memberData.organStatus.heart}
+        path="M202 271c-21-26-60-11-60 23 0 42 45 62 68 96 23-34 68-54 68-96 0-34-39-49-60-23l-8 11-8-11Z"
       />
 
-      <AnatomyButton
+      <OrganButton
         id="liver"
         label="Liver"
         selected={selectedOrgan === "liver"}
         onSelect={onSelect}
-        path="M102 338c26-31 94-45 138-20 19 11 7 43-19 49-45 10-94 2-124-10-9-4-7-12 5-19Z"
+        fill="#B94F46"
+        path="M113 391c34-42 121-58 175-29 25 13 16 50-18 59-56 15-124 5-161-10-13-5-11-14 4-20Z"
       />
-      <AnatomyButton
+
+      <OrganButton
         id="stomach"
         label="Stomach"
         selected={false}
         onSelect={() => undefined}
-        path="M213 323c26 7 45 31 36 61-8 30-37 44-62 31-22-12-21-35-10-52 12-19 23-23 36-40Z"
+        fill="#D58C8B"
+        path="M252 382c34 11 55 43 44 78-11 36-49 54-80 38-28-15-27-44-12-66 13-21 30-29 48-50Z"
       />
-      <AnatomyButton
+
+      <OrganButton
         id="pancreas"
         label="Pancreas"
         selected={selectedOrgan === "pancreas"}
         onSelect={onSelect}
-        status={pancreasStatus}
-        path="M122 390c31-17 94-20 121-4 10 6 7 21-5 24-40 8-85 8-120-1-12-3-8-13 4-19Z"
+        status={memberData.organStatus.pancreas}
+        path="M124 464c41-23 126-26 163-5 13 8 9 25-7 29-53 11-113 10-160-2-16-4-12-15 4-22Z"
       />
-      <AnatomyButton
+
+      <OrganButton
         id="spleen"
         label="Spleen"
         selected={false}
         onSelect={() => undefined}
-        path="M258 347c17 5 25 25 18 43-7 17-25 24-38 14-13-10-10-31 3-45 5-6 11-11 17-12Z"
+        fill="#9B4C74"
+        path="M300 412c19 7 28 31 20 52-8 21-30 31-47 19-17-12-15-37 1-55 7-8 16-14 26-16Z"
       />
-      <AnatomyButton
+
+      <OrganButton
         id="kidneys"
         label="Kidneys"
         selected={selectedOrgan === "kidneys"}
         onSelect={onSelect}
-        path="M128 397c-17 0-31 18-31 41 0 24 14 42 31 42 19 0 29-19 26-43-2-23-9-40-26-40Zm104 0c17 0 31 18 31 41 0 24-14 42-31 42-19 0-29-19-26-43 2-23 9-40 26-40Z"
+        fill="#C95F5D"
+        path="M151 449c-23 0-41 22-41 53s18 54 41 54c25 0 38-25 34-55-4-29-12-52-34-52Zm118 0c23 0 41 22 41 53s-18 54-41 54c-25 0-38-25-34-55 4-29 12-52 34-52Z"
       />
-      <AnatomyButton
+
+      <OrganButton
         id="intestines"
         label="Intestines"
         selected={false}
         onSelect={() => undefined}
-        path="M130 448c28-22 72-22 100 0 20 16 24 51 5 76-21 27-88 27-110 0-19-24-15-60 5-76Zm17 36c14-11 51-11 66 0M143 516c24 10 50 10 74 0"
+        fill="#D99D87"
+        path="M143 513c35-27 99-27 134 0 29 22 33 73 5 106-29 35-115 35-144 0-28-33-24-84 5-106Zm23 42c24-18 64-18 88 0M158 590c33 14 71 14 104 0M181 530c-20 16-21 49-1 62M239 530c20 16 21 49 1 62"
       />
-      <AnatomyButton
+
+      <OrganButton
         id="bladder"
         label="Bladder"
         selected={false}
         onSelect={() => undefined}
-        path="M159 550c13-12 29-12 42 0 12 11 11 34-2 45-11 10-27 10-38 0-13-11-14-34-2-45Z"
-      />
-
-      <AnatomyButton
-        id="bones"
-        label="Bones"
-        selected={selectedOrgan === "bones"}
-        onSelect={onSelect}
-        status={bonesStatus}
-        path="M180 132v470M128 202c26 12 78 12 104 0M121 224c34 18 84 18 118 0M118 249c40 20 84 20 124 0M138 457c26 19 58 19 84 0M157 476l-20 145M203 476l20 145"
-        fill="none"
+        fill="#D87872"
+        path="M187 638c14-15 32-15 46 0 14 14 13 41-2 54-13 11-29 11-42 0-15-13-16-40-2-54Z"
       />
     </svg>
   );
 }
 
-function AnatomyButton({
+function BodySilhouette() {
+  return (
+    <g>
+      <path
+        d="M210 18c37 0 63 28 63 66 0 36-25 65-63 65s-63-29-63-65c0-38 26-66 63-66Z"
+        fill="url(#skinTone)"
+        opacity="0.98"
+        stroke="#D98E83"
+        strokeWidth="2"
+      />
+      <path
+        d="M156 151c-45 21-70 65-78 132L49 459c-4 24 11 44 34 47l9 1 39-198 22-74v153l-18 126-10 199c-1 25 16 45 40 45 21 0 38-15 41-37l23-182h12l23 182c3 22 20 37 41 37 24 0 41-20 40-45l-10-199-18-126V235l22 74 39 198 9-1c23-3 38-23 34-47l-29-176c-8-67-33-111-78-132-31-15-52-18-83-18h-42c-31 0-52 3-83 18Z"
+        fill="url(#skinTone)"
+        opacity="0.94"
+        stroke="#D98E83"
+        strokeWidth="2"
+      />
+      <path d="M170 103c20 9 60 9 80 0" fill="none" stroke="#EAAFA6" strokeWidth="3" strokeLinecap="round" />
+      <path d="M183 118c18 10 36 10 54 0" fill="none" stroke="#EAAFA6" strokeWidth="3" strokeLinecap="round" />
+    </g>
+  );
+}
+
+function SkeletonLayer({ selectedOrgan, onSelect }: Pick<VitaMapProps, "selectedOrgan" | "onSelect">) {
+  const alert = memberData.organStatus.bones !== "green";
+  const color = statusFill(memberData.organStatus.bones);
+
+  return (
+    <g
+      role="button"
+      tabIndex={0}
+      onClick={() => onSelect("bones")}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          onSelect("bones");
+        }
+      }}
+      aria-label="Open Bones details"
+      className={alert ? "anatomy-alert" : undefined}
+      filter={alert ? "url(#medicalRedGlow)" : undefined}
+      opacity={alert ? 1 : 0.84}
+      style={{ cursor: "pointer" }}
+    >
+      <g fill="none" stroke={alert ? color : "#FFF3D8"} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M210 145v503" strokeWidth="9" />
+        <path d="M154 228c35 16 77 16 112 0" strokeWidth="5" />
+        <path d="M146 253c43 20 85 20 128 0" strokeWidth="5" />
+        <path d="M140 281c48 23 92 23 140 0" strokeWidth="5" />
+        <path d="M153 321c39 14 75 14 114 0" strokeWidth="4" />
+        <path d="M164 554c31 24 61 24 92 0" strokeWidth="10" />
+        <path d="M187 558l-25 165M233 558l25 165" strokeWidth="8" />
+        <path d="M155 154l-45 110M265 154l45 110" strokeWidth="8" />
+        <path d="M110 264L82 465M310 264l28 201" strokeWidth="7" />
+        <path d="M79 470l-21 41M341 470l21 41" strokeWidth="5" />
+        <path d="M165 724c-20 6-35 10-49 20M255 724c20 6 35 10 49 20" strokeWidth="7" />
+        <path d="M181 59c23-15 49-15 72 0M170 91c29 19 51 19 80 0" strokeWidth="5" />
+      </g>
+      {selectedOrgan === "bones" && (
+        <g fill="none" stroke="#FFFFFF" strokeLinecap="round" strokeLinejoin="round" pointerEvents="none">
+          <path d="M210 145v503M164 554c31 24 61 24 92 0" strokeWidth="13" opacity="0.8" />
+        </g>
+      )}
+    </g>
+  );
+}
+
+function OrganButton({
   id,
   label,
   path,
   selected,
   onSelect,
   status,
-  fill = "url(#neutralOrgan)",
+  fill = "url(#softOrgan)",
 }: {
   id: string;
   label: string;
@@ -294,9 +342,9 @@ function AnatomyButton({
   status?: StatusColor;
   fill?: string;
 }) {
-  const alert = status && status !== "green";
-  const color = alert ? statusFill(status) : undefined;
-  const glow = status === "red" ? "url(#redGlow)" : status === "yellow" ? "url(#yellowGlow)" : undefined;
+  const alertStatus = status && status !== "green" ? status : null;
+  const color = alertStatus ? statusFill(alertStatus) : fill;
+  const glow = alertStatus === "red" ? "url(#medicalRedGlow)" : alertStatus === "yellow" ? "url(#medicalYellowGlow)" : undefined;
 
   return (
     <g>
@@ -311,22 +359,18 @@ function AnatomyButton({
           }
         }}
         aria-label={`Open ${label} details`}
+        style={{ cursor: "pointer" }}
       >
         <path
           d={path}
-          fill={fill}
-          stroke={alert ? color : "#CBD5E1"}
-          strokeWidth={alert ? 3.5 : 1.6}
+          fill={color}
+          stroke={alertStatus ? statusFill(alertStatus) : "#9F6B67"}
+          strokeWidth={alertStatus ? 4 : 1.7}
           strokeLinecap="round"
           strokeLinejoin="round"
           filter={glow}
-          className={alert ? "anatomy-alert" : "transition-opacity duration-200 hover:opacity-100"}
-          style={{
-            color,
-            opacity: alert ? 0.96 : selected ? 0.82 : 0.58,
-            cursor: "pointer",
-            fill: fill === "none" ? "none" : alert ? color : undefined,
-          }}
+          className={alertStatus ? "anatomy-alert" : "transition-opacity duration-200 hover:opacity-100"}
+          opacity={alertStatus ? 1 : selected ? 0.94 : 0.86}
         />
       </g>
       {selected && (
@@ -337,7 +381,7 @@ function AnatomyButton({
           strokeWidth={5}
           strokeLinecap="round"
           strokeLinejoin="round"
-          opacity="0.74"
+          opacity="0.86"
           pointerEvents="none"
         />
       )}
