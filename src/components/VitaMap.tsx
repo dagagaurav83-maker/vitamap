@@ -78,7 +78,7 @@ export function VitaMap({ selectedOrgan, onSelect, compact = false }: VitaMapPro
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="absolute inset-0 z-10 flex items-center justify-center px-0 pb-[76px] pt-[116px] sm:items-end sm:px-8 sm:pb-16 sm:pt-24"
+        className="absolute inset-0 z-10 flex items-start justify-center px-0 pb-[72px] pt-[148px] sm:items-end sm:px-8 sm:pb-16 sm:pt-24"
       >
         <AnatomySvg selectedOrgan={selectedOrgan} onSelect={onSelect} />
       </motion.div>
@@ -126,7 +126,7 @@ function AnatomySvg({ selectedOrgan, onSelect }: Pick<VitaMapProps, "selectedOrg
       viewBox="0 0 420 760"
       role="img"
       aria-label="Front-view human body anatomy illustration with skeleton, brain, lungs, heart, liver, stomach, pancreas, kidneys, intestines, bladder and pelvis"
-      className="h-auto w-[210px] max-w-full sm:h-full sm:max-h-[650px] sm:w-full sm:max-w-[470px]"
+      className="h-auto w-[248px] max-w-full sm:h-full sm:max-h-[650px] sm:w-full sm:max-w-[470px]"
     >
       <defs>
         <filter id="medicalRedGlow" x="-80%" y="-80%" width="260%" height="260%">
@@ -144,12 +144,12 @@ function AnatomySvg({ selectedOrgan, onSelect }: Pick<VitaMapProps, "selectedOrg
           </feMerge>
         </filter>
         <linearGradient id="skinTone" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stopColor="#FFD8C9" />
-          <stop offset="100%" stopColor="#F4A99A" />
+          <stop offset="0%" stopColor="#FFCDBD" />
+          <stop offset="100%" stopColor="#F09B8D" />
         </linearGradient>
         <linearGradient id="softOrgan" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stopColor="#F6B5A8" />
-          <stop offset="100%" stopColor="#D88481" />
+          <stop offset="0%" stopColor="#F39B91" />
+          <stop offset="100%" stopColor="#C85F5C" />
         </linearGradient>
       </defs>
 
