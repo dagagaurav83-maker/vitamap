@@ -97,7 +97,7 @@ function FamilySnapshotCards() {
 function ScoreRing({ score, color, delay }: { score: number; color: string; delay: number }) {
   const radius = 23;
   const circumference = 2 * Math.PI * radius;
-  const progressOffset = circumference - (score / 100) * circumference;
+  const progressLength = (score / 100) * circumference;
 
   return (
     <motion.div
@@ -110,7 +110,7 @@ function ScoreRing({ score, color, delay }: { score: number; color: string; dela
     >
       <svg className="absolute inset-0 -rotate-90" viewBox="0 0 56 56" aria-hidden="true">
         <circle cx="28" cy="28" r={radius} fill="none" stroke="#E5E5EA" strokeWidth="6" />
-        <motion.circle
+        <circle
           cx="28"
           cy="28"
           r={radius}
@@ -118,11 +118,7 @@ function ScoreRing({ score, color, delay }: { score: number; color: string; dela
           stroke={color}
           strokeWidth="6"
           strokeLinecap="round"
-          strokeDasharray={circumference}
-          initial={{ strokeDashoffset: circumference }}
-          whileInView={{ strokeDashoffset: progressOffset }}
-          viewport={{ once: true }}
-          transition={{ delay: delay + 0.12, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
+          strokeDasharray={`${progressLength} ${circumference - progressLength}`}
         />
       </svg>
       <span className="relative text-lg font-semibold text-[#1D1D1F]">{score}</span>
