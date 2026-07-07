@@ -198,6 +198,26 @@ select {
   animation: anatomyRealOrganPulse 1.55s ease-in-out infinite;
 }
 
+@keyframes anatomyOrganLayerPulse {
+  0%,
+  100% {
+    opacity: 0.82;
+    filter: saturate(1.08) brightness(1) drop-shadow(0 0 10px color-mix(in srgb, var(--organ-glow), transparent 50%));
+  }
+  50% {
+    opacity: 1;
+    filter: saturate(1.35) brightness(1.08) drop-shadow(0 0 22px color-mix(in srgb, var(--organ-glow), transparent 28%));
+  }
+}
+
+.anatomy-organ-layer {
+  animation: anatomyOrganLayerPulse 1.45s ease-in-out infinite;
+}
+
+.anatomy-organ-layer-yellow {
+  animation-duration: 1.7s;
+}
+
 @keyframes focusOrganBlink {
   0%,
   100% {

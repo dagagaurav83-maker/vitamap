@@ -126,7 +126,7 @@ function AnatomySvg({ selectedOrgan, onSelect }: Pick<VitaMapProps, "selectedOrg
     <AnatomyBodyMap
       selectedOrgan={selectedOrgan}
       onSelect={onSelect}
-      imageClassName="opacity-60 grayscale contrast-75 saturate-0 drop-shadow-[0_18px_35px_rgba(15,23,42,0.08)]"
+      imageClassName="opacity-72 grayscale contrast-90 saturate-0 drop-shadow-[0_18px_35px_rgba(15,23,42,0.08)]"
     />
   );
 }
