@@ -64,7 +64,7 @@ export default function HomePage() {
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#F7F8FA] pb-24 text-[#16181D] md:pb-0">
       <div className="flowing-home-gradient pointer-events-none absolute inset-x-0 top-0 -z-10 h-[720px]" />
-      <header className="sticky top-0 z-50 bg-white/32 backdrop-blur-xl">
+      <header className="sticky top-0 z-50">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-3" aria-label="VitaMap home">
             <span className="grid size-9 place-items-center rounded-lg bg-[#113D3A] text-sm font-bold text-white">
