@@ -33,7 +33,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-[#F2F2F7] text-[#1D1D1F]">
       <aside className="no-print fixed inset-y-0 left-0 z-30 hidden w-60 border-r border-[#E8E8E8] bg-[#FAFAFA] px-4 py-6 md:flex md:flex-col">
-        <BrandLogo className="mb-8" iconClassName="size-10" wordClassName="text-xl" stacked tagline="Preventive health" />
+        <BrandLogo className="mb-8" logoClassName="h-14 w-auto" stacked tagline="Preventive health" />
 
         <div className="mb-6 rounded-xl border border-[#E5E5EA] bg-white p-4">
           <div className="flex items-center gap-3">

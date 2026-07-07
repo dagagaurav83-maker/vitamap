@@ -67,7 +67,7 @@ export default function HomePage() {
       <div className="flowing-home-gradient pointer-events-none absolute inset-x-0 top-0 -z-10 h-[720px]" />
       <header className="sticky top-0 z-50">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-          <BrandLogo wordClassName="text-lg" />
+          <BrandLogo logoClassName="h-12 w-auto" />
 
           <nav className="hidden items-center gap-7 text-sm font-semibold text-[#58606B] md:flex">
             <a className="transition hover:text-[#16181D]" href="#product">
@@ -265,7 +265,7 @@ export default function HomePage() {
 
       <footer className="border-t border-[#E2E6EA] bg-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <BrandLogo stacked tagline="Know what matters. Track what changes." />
+          <BrandLogo logoClassName="h-12 w-auto" stacked tagline="Know what matters. Track what changes." />
           <div className="flex flex-wrap gap-3 text-sm font-semibold text-[#58606B]">
             <Link className="hover:text-[#16181D]" href="/dashboard">
               Dashboard

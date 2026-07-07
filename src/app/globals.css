@@ -26,12 +26,6 @@ body {
   text-rendering: geometricPrecision;
 }
 
-.organix-wordmark {
-  font-family: var(--font-organix), var(--font-inter), "Inter", sans-serif;
-  font-weight: 700;
-  letter-spacing: 0;
-}
-
 button,
 a,
 input,
