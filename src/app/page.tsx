@@ -9,7 +9,6 @@ import {
   Building2,
   Check,
   ChevronRight,
-  CircleGauge,
   ClipboardCheck,
   LockKeyhole,
   ShieldCheck,
@@ -17,12 +16,10 @@ import {
   Stethoscope,
   TestTube2,
   TimerReset,
-  TrendingDown,
 } from "lucide-react";
-import { AnatomyBodyMap } from "@/components/AnatomyBodyMap";
 import { VitaMap } from "@/components/VitaMap";
 import { useCountUp } from "@/components/motion-utils";
-import { categories, memberData, pricingPlans, statusStyles } from "@/lib/data";
+import { categories, pricingPlans } from "@/lib/data";
 
 const proofPoints = [
   ["60-100", "blood markers mapped"],
@@ -59,19 +56,6 @@ const trustSignals = [
   { label: "Private health data", icon: LockKeyhole },
   { label: "Made for Indian families", icon: ShieldCheck },
 ];
-
-const demoRows = memberData.flaggedMarkers.map((marker) => {
-  const organStatus = memberData.organStatus[marker.organ] ?? "yellow";
-
-  return {
-    marker: marker.friendlyName,
-    value: marker.value.replace(/\s.*$/, ""),
-    status: marker.status === "high" ? "Needs attention" : marker.status === "low" ? "Low" : "Watch",
-    organ: marker.organ,
-    color: statusStyles[organStatus].fill,
-    severity: organStatus,
-  };
-});
 
 export default function HomePage() {
   const [selectedOrgan, setSelectedOrgan] = useState("heart");
@@ -158,68 +142,7 @@ export default function HomePage() {
           </div>
 
           <div className="relative min-w-0 w-[min(340px,calc(100vw-32px))] sm:w-auto sm:max-w-none">
-            <div className="rounded-lg border border-[#DDE3E8] bg-white p-3 shadow-[0_24px_80px_rgba(23,31,38,0.12)]">
-              <div className="min-w-0 rounded-lg bg-[#101820] p-4 text-white sm:p-5">
-                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#85E0D2]">
-                      Rahul&apos;s VitaMap
-                    </p>
-                    <h2 className="mt-1 text-2xl font-semibold">Score {memberData.score}</h2>
-                  </div>
-                  <div className="rounded-lg bg-white/10 px-3 py-2 text-right">
-                    <p className="text-xs text-white/62">Next test</p>
-                    <p className="text-sm font-semibold">{memberData.nextTestDue}</p>
-                  </div>
-                </div>
-
-                <div className="grid gap-4 pt-5 lg:grid-cols-[0.95fr_1.05fr]">
-                  <div className="rounded-lg border border-white/10 bg-white/[0.06] p-4">
-                    <div className="mb-4 flex items-center justify-between">
-                      <span className="text-sm font-semibold">Body status</span>
-                      <CircleGauge className="text-[#85E0D2]" size={20} />
-                    </div>
-                    <div className="relative mx-auto h-72 max-w-[220px] overflow-hidden rounded-lg bg-[#081016] sm:h-80 sm:max-w-[240px]">
-                      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(133,224,210,0.18),rgba(8,16,22,0)_68%)]" />
-                      <AnatomyBodyMap
-                        className="relative z-10 mx-auto h-full w-auto"
-                        imageClassName="h-full w-auto max-w-none opacity-42 grayscale contrast-90 brightness-90 saturate-0"
-                      />
-                      <div className="absolute inset-0 z-20 bg-[#081016]/5" />
-                      <div className="absolute inset-x-0 bottom-0 z-30 h-20 bg-[linear-gradient(180deg,rgba(8,16,22,0),rgba(8,16,22,0.88))]" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    {demoRows.map((row) => (
-                      <div key={row.marker} className="rounded-lg border border-white/10 bg-white/[0.06] p-4">
-                        <div className="flex items-start justify-between gap-3">
-                          <div>
-                            <p className="text-sm font-semibold">{row.marker}</p>
-                            <p className="mt-1 text-xs text-white/58">{row.status}</p>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span
-                              className="size-2.5 rounded-full"
-                              style={{ backgroundColor: row.color, boxShadow: `0 0 16px ${row.color}` }}
-                            />
-                            <span className="text-sm font-semibold">{row.value}</span>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                    <div className="rounded-lg border border-[#85E0D2]/25 bg-[#85E0D2]/10 p-4">
-                      <div className="flex items-center gap-3">
-                        <TrendingDown className="text-[#85E0D2]" size={20} />
-                        <p className="text-sm leading-6 text-white/82">
-                          Focus first on cholesterol, Vitamin D, and after-meal walks.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <VitaMap selectedOrgan={selectedOrgan} onSelect={setSelectedOrgan} compact />
           </div>
         </div>
       </section>
