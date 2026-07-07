@@ -11,13 +11,18 @@ const navItems = [
   { label: "Recommendation", href: "/recommendations", icon: Lightbulb },
 ];
 
+function normalizePath(pathname: string) {
+  const withoutBasePath = pathname.replace(/^\/vitamap(?=\/|$)/, "") || "/";
+  return withoutBasePath.length > 1 ? withoutBasePath.replace(/\/$/, "") : withoutBasePath;
+}
+
 export function BottomTabBar() {
-  const pathname = usePathname();
+  const activePath = normalizePath(usePathname());
 
   return (
     <nav className="no-print fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-[#E5E5EA] bg-white/95 px-2 py-2 shadow-lg backdrop-blur md:hidden">
       {navItems.map((item) => {
-        const active = pathname === item.href;
+        const active = activePath === item.href;
         const Icon = item.icon;
 
         return (
@@ -39,4 +44,3 @@ export function BottomTabBar() {
     </nav>
   );
 }
-

@@ -20,9 +20,14 @@ const navItems = [
   { label: "Recommendation", href: "/recommendations", icon: Lightbulb },
 ];
 
+function normalizePath(pathname: string) {
+  const withoutBasePath = pathname.replace(/^\/vitamap(?=\/|$)/, "") || "/";
+  return withoutBasePath.length > 1 ? withoutBasePath.replace(/\/$/, "") : withoutBasePath;
+}
+
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const isNavItemActive = (href: string) => pathname === href;
+  const activePath = normalizePath(usePathname());
+  const isNavItemActive = (href: string) => activePath === href;
 
   return (
     <div className="min-h-screen bg-[#F2F2F7] text-[#1D1D1F]">
