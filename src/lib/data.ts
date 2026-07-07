@@ -67,7 +67,7 @@ export const memberData = {
       name: "LDL Cholesterol",
       friendlyName: "Bad Cholesterol",
       value: "148 mg/dL",
-      gaugeScore: 82,
+      gaugeScore: 42,
       status: "high",
       organ: "heart",
       linkedOrgan: "Heart",
@@ -86,7 +86,7 @@ export const memberData = {
       name: "Vitamin D",
       friendlyName: "Vitamin D",
       value: "14 ng/mL",
-      gaugeScore: 91,
+      gaugeScore: 28,
       status: "low",
       organ: "bones",
       linkedOrgan: "Bones",
@@ -105,7 +105,7 @@ export const memberData = {
       name: "HbA1c",
       friendlyName: "Blood Sugar",
       value: "5.9%",
-      gaugeScore: 63,
+      gaugeScore: 61,
       status: "borderline",
       organ: "pancreas",
       linkedOrgan: "Pancreas",
@@ -124,13 +124,13 @@ export const memberData = {
 };
 
 export const healthyMarkers = [
-  { friendlyName: "Liver Enzymes", value: "Normal", status: "good", gaugeScore: 74 },
-  { friendlyName: "Kidney Function", value: "Normal", status: "good", gaugeScore: 88 },
-  { friendlyName: "Thyroid", value: "Normal", status: "good", gaugeScore: 69 },
-  { friendlyName: "Inflammation", value: "Low", status: "good", gaugeScore: 57 },
-  { friendlyName: "Hemoglobin", value: "14.2 g/dL", status: "good", gaugeScore: 81 },
-  { friendlyName: "B12", value: "Good", status: "good", gaugeScore: 72 },
-  { friendlyName: "Triglycerides", value: "Good", status: "good", gaugeScore: 66 },
+  { friendlyName: "Liver Enzymes", value: "Normal", status: "good", gaugeScore: 96 },
+  { friendlyName: "Kidney Function", value: "Normal", status: "good", gaugeScore: 94 },
+  { friendlyName: "Thyroid", value: "Normal", status: "good", gaugeScore: 92 },
+  { friendlyName: "Inflammation", value: "Low", status: "good", gaugeScore: 89 },
+  { friendlyName: "Hemoglobin", value: "14.2 g/dL", status: "good", gaugeScore: 87 },
+  { friendlyName: "B12", value: "Good", status: "good", gaugeScore: 85 },
+  { friendlyName: "Triglycerides", value: "Good", status: "good", gaugeScore: 83 },
 ];
 
 export const markerCards = [

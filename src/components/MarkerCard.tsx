@@ -24,7 +24,8 @@ export function MarkerCard({ marker }: { marker: Marker }) {
   const [open, setOpen] = useState(false);
   const color = marker.status === "good" ? "green" : marker.status === "borderline" ? "yellow" : "red";
   const styles = statusStyles[color];
-  const percent = Math.max(8, Math.min(100, marker.gaugeScore ?? 70));
+  const healthScore = Math.max(0, Math.min(100, marker.gaugeScore ?? 70));
+  const arcFill = Math.max(8, healthScore);
 
   return (
     <>
@@ -72,13 +73,14 @@ export function MarkerCard({ marker }: { marker: Marker }) {
                 fill="none"
                 pathLength={100}
                 stroke={styles.fill}
-                strokeDasharray={`${percent} ${100 - percent}`}
+                strokeDasharray={`${arcFill} ${100 - arcFill}`}
                 strokeLinecap="round"
                 strokeWidth="14"
               />
             </svg>
-            <div className="absolute inset-x-0 bottom-1 flex items-center justify-center text-sm font-bold text-slate-700">
-              {percent}
+            <div className="absolute inset-x-0 bottom-0 flex flex-col items-center justify-center leading-none">
+              <span className="text-sm font-bold text-slate-800">{healthScore}/100</span>
+              <span className="mt-1 text-[10px] font-semibold uppercase text-slate-500">Health score</span>
             </div>
           </motion.div>
         </div>
