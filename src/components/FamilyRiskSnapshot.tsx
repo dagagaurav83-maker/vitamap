@@ -77,9 +77,7 @@ function FamilySnapshotCards() {
             </div>
 
             <div className="mt-4 flex items-center gap-3">
-              <div className="grid size-14 place-items-center rounded-full border-[6px] border-[#E5E5EA] text-lg font-semibold text-[#1D1D1F]">
-                {person.score}
-              </div>
+              <ScoreRing score={person.score} color={styles.fill} delay={index * 0.08 + 0.15} />
               <div>
                 <p className="text-sm font-semibold text-[#1D1D1F]">Next test: {person.nextTest}</p>
                 <p className="mt-1 text-xs font-semibold text-[#86868B]">{person.sharedRisk}</p>
@@ -93,6 +91,42 @@ function FamilySnapshotCards() {
         );
       })}
     </div>
+  );
+}
+
+function ScoreRing({ score, color, delay }: { score: number; color: string; delay: number }) {
+  const radius = 23;
+  const circumference = 2 * Math.PI * radius;
+  const progressOffset = circumference - (score / 100) * circumference;
+
+  return (
+    <motion.div
+      className="relative grid size-14 shrink-0 place-items-center"
+      initial={{ opacity: 0, x: -14 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay, duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+      aria-label={`VitaScore ${score} out of 100`}
+    >
+      <svg className="absolute inset-0 -rotate-90" viewBox="0 0 56 56" aria-hidden="true">
+        <circle cx="28" cy="28" r={radius} fill="none" stroke="#E5E5EA" strokeWidth="6" />
+        <motion.circle
+          cx="28"
+          cy="28"
+          r={radius}
+          fill="none"
+          stroke={color}
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeDasharray={circumference}
+          initial={{ strokeDashoffset: circumference }}
+          whileInView={{ strokeDashoffset: progressOffset }}
+          viewport={{ once: true }}
+          transition={{ delay: delay + 0.12, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
+        />
+      </svg>
+      <span className="relative text-lg font-semibold text-[#1D1D1F]">{score}</span>
+    </motion.div>
   );
 }
 
