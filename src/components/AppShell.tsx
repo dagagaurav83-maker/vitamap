@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Activity,
-  CalendarClock,
   Home,
   LineChart,
   Lightbulb,
@@ -15,38 +13,15 @@ import {
 import { memberData } from "@/lib/data";
 
 const navItems = [
-  { label: "My VitaMap", href: "/dashboard", icon: Home },
-  { label: "My Results", href: "/dashboard#markers", icon: Activity },
+  { label: "Home", href: "/", icon: Home },
+  { label: "Dashboard", href: "/dashboard", icon: Activity },
   { label: "Progress", href: "/progress", icon: LineChart },
-  { label: "Recommendations", href: "/recommendations", icon: Lightbulb },
-  { label: "Next Test", href: "/dashboard#next-test", icon: CalendarClock },
+  { label: "Recommendation", href: "/recommendations", icon: Lightbulb },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [currentHash, setCurrentHash] = useState("");
-
-  useEffect(() => {
-    const syncHash = () => setCurrentHash(window.location.hash);
-
-    syncHash();
-    window.addEventListener("hashchange", syncHash);
-    window.addEventListener("popstate", syncHash);
-
-    return () => {
-      window.removeEventListener("hashchange", syncHash);
-      window.removeEventListener("popstate", syncHash);
-    };
-  }, []);
-
-  const currentRoute = `${pathname}${currentHash}`;
-  const isNavItemActive = (href: string) => {
-    if (href.includes("#")) {
-      return currentRoute === href;
-    }
-
-    return pathname === href && currentHash === "";
-  };
+  const isNavItemActive = (href: string) => pathname === href;
 
   return (
     <div className="min-h-screen bg-[#F2F2F7] text-[#1D1D1F]">
@@ -112,8 +87,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       <main className="pb-24 md:ml-60 md:pb-0">{children}</main>
 
-      <nav className="no-print fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-[#E5E5EA] bg-white/95 px-2 py-2 shadow-lg backdrop-blur md:hidden">
-        {navItems.slice(0, 5).map((item) => {
+      <nav className="no-print fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-[#E5E5EA] bg-white/95 px-2 py-2 shadow-lg backdrop-blur md:hidden">
+        {navItems.map((item) => {
           const active = isNavItemActive(item.href);
           const Icon = item.icon;
           return (
@@ -125,7 +100,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               }`}
             >
               <Icon size={20} strokeWidth={active ? 2.5 : 2} />
-              <span className="max-w-full truncate">{item.label.replace("My ", "")}</span>
+              <span className="max-w-full text-center leading-tight">{item.label}</span>
             </Link>
           );
         })}
