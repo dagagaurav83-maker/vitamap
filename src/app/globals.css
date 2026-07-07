@@ -239,6 +239,32 @@ select {
   animation: shimmerBorder 3s ease-out infinite;
 }
 
+@keyframes homeGradientFlow {
+  0%,
+  100% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+}
+
+.flowing-home-gradient {
+  background:
+    radial-gradient(circle at 18% 4%, rgba(48, 209, 88, 0.22), transparent 34%),
+    radial-gradient(circle at 84% 0%, rgba(20, 184, 166, 0.2), transparent 32%),
+    linear-gradient(180deg, #dff8ee 0%, #edf9f5 42%, rgba(247, 248, 250, 0) 100%);
+  background-size: 140% 180%;
+  animation: homeGradientFlow 8s ease-in-out infinite;
+}
+
+.flowing-green-cta {
+  background: linear-gradient(135deg, #0b3d36 0%, #0f766e 34%, #30d158 68%, #0b3d36 100%);
+  background-size: 220% 220%;
+  box-shadow: 0 16px 32px rgba(15, 118, 110, 0.2);
+  animation: homeGradientFlow 5.5s ease-in-out infinite;
+}
+
 @keyframes skeletonShimmer {
   0% {
     background-position: -200% 0;

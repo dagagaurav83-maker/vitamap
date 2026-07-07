@@ -62,8 +62,9 @@ export default function HomePage() {
   const [selectedOrgan, setSelectedOrgan] = useState("heart");
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#F7F8FA] pb-24 text-[#16181D] md:pb-0">
-      <header className="sticky top-0 z-50 border-b border-[#E2E6EA]/80 bg-[#F7F8FA]/88 backdrop-blur-xl">
+    <main className="relative isolate min-h-screen overflow-hidden bg-[#F7F8FA] pb-24 text-[#16181D] md:pb-0">
+      <div className="flowing-home-gradient pointer-events-none absolute inset-x-0 top-0 -z-10 h-[720px]" />
+      <header className="sticky top-0 z-50 border-b border-[#B7D9D2]/55 bg-white/42 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-3" aria-label="VitaMap home">
             <span className="grid size-9 place-items-center rounded-lg bg-[#113D3A] text-sm font-bold text-white">
@@ -89,7 +90,7 @@ export default function HomePage() {
 
           <Link
             href="/signup"
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-[#113D3A] px-4 text-sm font-semibold text-white transition hover:bg-[#0B2D2A]"
+            className="flowing-green-cta inline-flex h-10 items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold text-white transition hover:-translate-y-0.5"
           >
             Start <ArrowRight size={16} />
           </Link>
@@ -97,7 +98,6 @@ export default function HomePage() {
       </header>
 
       <section className="relative">
-        <div className="absolute inset-x-0 top-0 h-[520px] bg-[linear-gradient(180deg,#EAF7F3_0%,rgba(247,248,250,0)_100%)]" />
         <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pb-16 pt-12 sm:px-6 sm:pt-16 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:pb-20 lg:pt-20">
           <div className="min-w-0 w-[min(340px,calc(100vw-32px))] sm:w-auto sm:max-w-none">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#B7D9D2] bg-white px-3 py-1.5 text-xs font-semibold text-[#0F766E] shadow-sm">
