@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -21,7 +22,8 @@ import {
 } from "lucide-react";
 import { VitaMap } from "@/components/VitaMap";
 import { useCountUp } from "@/components/motion-utils";
-import { categories, memberData, pricingPlans } from "@/lib/data";
+import anatomyReportMap from "../../public/images/anatomy-report-map-v1.png";
+import { categories, memberData, pricingPlans, statusStyles, type StatusColor } from "@/lib/data";
 
 const proofPoints = [
   ["60-100", "blood markers mapped"],
@@ -59,12 +61,33 @@ const trustSignals = [
   { label: "Made for Indian families", icon: ShieldCheck },
 ];
 
-const demoRows = [
-  { marker: "Bad cholesterol", value: "148", status: "Needs attention", color: "bg-[#FF3B30]" },
-  { marker: "Vitamin D", value: "14", status: "Low", color: "bg-[#FF9F0A]" },
-  { marker: "Blood sugar", value: "5.9", status: "Watch", color: "bg-[#FF9F0A]" },
-  { marker: "Kidney function", value: "Good", status: "Healthy", color: "bg-[#30D158]" },
-];
+const organHotspots: Record<string, { x: string; y: string; size: string; shape?: string }> = {
+  heart: { x: "50%", y: "33%", size: "42px" },
+  pancreas: { x: "51%", y: "45%", size: "64px", shape: "h-8 rounded-full" },
+  bones: { x: "50%", y: "51%", size: "76%", shape: "h-[88%] rounded-[44%]" },
+};
+
+const demoRows = memberData.flaggedMarkers.map((marker) => {
+  const organStatus = memberData.organStatus[marker.organ] ?? "yellow";
+
+  return {
+    marker: marker.friendlyName,
+    value: marker.value.replace(/\s.*$/, ""),
+    status: marker.status === "high" ? "Needs attention" : marker.status === "low" ? "Low" : "Watch",
+    organ: marker.organ,
+    color: statusStyles[organStatus].fill,
+    severity: organStatus,
+  };
+});
+
+const focusOrgans = demoRows
+  .map((row) => ({
+    ...row,
+    hotspot: organHotspots[row.organ],
+  }))
+  .filter((row): row is typeof row & { hotspot: NonNullable<typeof row.hotspot>; severity: StatusColor } =>
+    Boolean(row.hotspot),
+  );
 
 export default function HomePage() {
   const [selectedOrgan, setSelectedOrgan] = useState("heart");
@@ -173,13 +196,37 @@ export default function HomePage() {
                       <CircleGauge className="text-[#85E0D2]" size={20} />
                     </div>
                     <div className="relative mx-auto h-72 max-w-[220px] overflow-hidden rounded-lg bg-[#081016] sm:h-80 sm:max-w-[240px]">
-                      <div className="absolute inset-x-8 top-5 h-[270px] rounded-full border border-[#85E0D2]/20 bg-[radial-gradient(ellipse_at_center,rgba(133,224,210,0.22),rgba(8,16,22,0)_66%)]" />
-                      <div className="absolute left-1/2 top-8 h-12 w-12 -translate-x-1/2 rounded-full border border-[#85E0D2]/45 bg-[#17302F]" />
-                      <div className="absolute left-1/2 top-24 h-28 w-24 -translate-x-1/2 rounded-[48px] border border-[#85E0D2]/35 bg-[#17302F]" />
-                      <div className="absolute left-[42%] top-32 size-7 rounded-full bg-[#FF3B30] shadow-[0_0_24px_rgba(255,59,48,0.55)]" />
-                      <div className="absolute left-[52%] top-44 h-7 w-10 rounded-full bg-[#FF9F0A] shadow-[0_0_22px_rgba(255,159,10,0.5)]" />
-                      <div className="absolute left-1/2 top-[210px] h-20 w-20 -translate-x-1/2 rounded-[36px] border border-[#85E0D2]/20 bg-[#17302F]" />
-                      <div className="absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(180deg,rgba(8,16,22,0),rgba(133,224,210,0.12))]" />
+                      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(133,224,210,0.18),rgba(8,16,22,0)_68%)]" />
+                      <Image
+                        src={anatomyReportMap}
+                        alt="Greyed anatomy body map with glowing report focus organs"
+                        priority
+                        sizes="(max-width: 640px) 220px, 240px"
+                        className="relative z-10 mx-auto h-full w-auto max-w-none select-none object-contain opacity-85 grayscale contrast-90 brightness-90"
+                      />
+                      <div className="absolute inset-0 z-20 bg-[#081016]/5" />
+                      {focusOrgans.map((organ) => (
+                        <span
+                          key={organ.organ}
+                          className={`focus-organ-glow pointer-events-none absolute z-30 ${
+                            organ.hotspot.shape ?? "rounded-full"
+                          }`}
+                          style={{
+                            left: organ.hotspot.x,
+                            top: organ.hotspot.y,
+                            width: organ.hotspot.size,
+                            height: organ.hotspot.shape ? undefined : organ.hotspot.size,
+                            backgroundColor: organ.organ === "bones" ? "transparent" : organ.color,
+                            boxShadow:
+                              organ.organ === "bones"
+                                ? `inset 0 0 26px ${organ.color}, 0 0 34px ${organ.color}`
+                                : `0 0 22px ${organ.color}, 0 0 44px ${organ.color}`,
+                            border: organ.organ === "bones" ? `2px solid ${organ.color}` : undefined,
+                            opacity: organ.organ === "bones" ? 0.58 : undefined,
+                          }}
+                        />
+                      ))}
+                      <div className="absolute inset-x-0 bottom-0 z-30 h-20 bg-[linear-gradient(180deg,rgba(8,16,22,0),rgba(8,16,22,0.88))]" />
                     </div>
                   </div>
 
@@ -192,7 +239,10 @@ export default function HomePage() {
                             <p className="mt-1 text-xs text-white/58">{row.status}</p>
                           </div>
                           <div className="flex items-center gap-2">
-                            <span className={`size-2.5 rounded-full ${row.color}`} />
+                            <span
+                              className="size-2.5 rounded-full"
+                              style={{ backgroundColor: row.color, boxShadow: `0 0 16px ${row.color}` }}
+                            />
                             <span className="text-sm font-semibold">{row.value}</span>
                           </div>
                         </div>
