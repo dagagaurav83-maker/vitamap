@@ -102,12 +102,14 @@ export default function HomePage() {
             </div>
 
             <h1 className="mt-5 max-w-full break-words text-[40px] font-semibold leading-[1.02] tracking-[-0.02em] text-[#0D1412] sm:max-w-3xl sm:text-6xl lg:text-[76px]">
-              See what your body needs before it becomes a problem.
+              <span className="block">Most big diseases give warning signs years before diagnosis.</span>
+              <span className="block">We help you catch them.</span>
             </h1>
 
             <p className="mt-6 max-w-full text-base leading-7 text-[#58606B] sm:max-w-2xl sm:text-lg sm:leading-8">
-              Organix converts a full-body blood test into a simple body map,
-              clear risk priorities, and a plan you can track every few months.
+              Organix tracks the blood markers that predict heart disease,
+              diabetes, and organ damage &mdash; months or years before symptoms show up.
+              Test, track the trend, act early.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -115,13 +117,13 @@ export default function HomePage() {
                 href="/signup"
                 className="flowing-green-cta inline-flex h-12 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold text-white transition hover:-translate-y-0.5"
               >
-                Get your health mapped <ArrowRight size={17} />
+                Start tracking your risk <ArrowRight size={17} />
               </Link>
               <Link
                 href="/dashboard"
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-white/80 bg-white/78 px-5 text-sm font-semibold text-[#16181D] shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:bg-white"
               >
-                Open demo dashboard <ChevronRight size={17} />
+                See a sample report <ChevronRight size={17} />
               </Link>
             </div>
 
