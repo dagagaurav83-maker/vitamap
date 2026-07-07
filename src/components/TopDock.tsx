@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -42,5 +43,40 @@ export function TopDock({ className = "" }: { className?: string }) {
         );
       })}
     </nav>
+  );
+}
+
+export function AutoHideTopDock({ className = "" }: { className?: string }) {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    function handleScroll() {
+      const currentScrollY = window.scrollY;
+      const scrollingUp = currentScrollY < lastScrollY;
+      const nearTop = currentScrollY < 80;
+
+      if (nearTop || scrollingUp) {
+        setVisible(true);
+      } else if (currentScrollY - lastScrollY > 8) {
+        setVisible(false);
+      }
+
+      lastScrollY = currentScrollY;
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div
+      className={`no-print fixed inset-x-0 top-3 z-50 px-3 transition duration-300 ease-out md:top-4 ${
+        visible ? "translate-y-0 opacity-100" : "-translate-y-24 opacity-0"
+      } ${className}`}
+    >
+      <TopDock />
+    </div>
   );
 }

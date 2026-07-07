@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { BottomTabBar } from "@/components/BottomTabBar";
-import { TopDock } from "@/components/TopDock";
+import { AutoHideTopDock } from "@/components/TopDock";
 import { VitaMap } from "@/components/VitaMap";
 import { useCountUp } from "@/components/motion-utils";
 import { categories, pricingPlans } from "@/lib/data";
@@ -66,11 +66,11 @@ export default function HomePage() {
   return (
     <main className="soft-page-bg relative isolate min-h-screen overflow-hidden pb-28 text-[#16181D] md:pb-0">
       <div className="flowing-home-gradient pointer-events-none absolute inset-x-0 top-0 -z-10 h-[760px]" />
-      <header className="sticky top-0 z-50">
+      <AutoHideTopDock className="hidden md:block" />
+
+      <header>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <BrandLogo logoClassName="h-12 w-auto" />
-
-          <TopDock className="hidden md:flex" />
 
           <Link
             href="/signup"
