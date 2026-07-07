@@ -58,14 +58,14 @@ export function VitaMap({ selectedOrgan, onSelect, compact = false }: VitaMapPro
   return (
     <section
       className={`relative overflow-hidden rounded-2xl border border-[#E5E5EA] bg-white text-[#1D1D1F] shadow-[0_24px_80px_rgba(15,23,42,0.08)] sm:rounded-[20px] ${shellHeightClass}`}
-      aria-label="VitaMap body map"
+      aria-label="Organix body map"
     >
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#FFFFFF_0%,#F8FAFC_100%)]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#FF3B30] via-[#FF9F0A] to-[#30D158]" />
 
       <div className="absolute left-4 top-4 z-20 sm:left-5 sm:top-5">
         <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#0F766E] sm:text-xs sm:tracking-[0.18em]">
-          VitaMap body scan
+          Organix body scan
         </p>
         <h2 className="mt-1 text-xl font-semibold tracking-tight text-[#1D1D1F] sm:text-2xl">
           Anatomy report map

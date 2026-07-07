@@ -36,7 +36,7 @@ const journey = [
   },
   {
     title: "Plain-English map",
-    text: "VitaMap turns numbers into organ-level signals you can act on.",
+    text: "Organix turns numbers into organ-level signals you can act on.",
     icon: Sparkles,
   },
   {
@@ -66,11 +66,11 @@ export default function HomePage() {
       <div className="flowing-home-gradient pointer-events-none absolute inset-x-0 top-0 -z-10 h-[720px]" />
       <header className="sticky top-0 z-50">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-3" aria-label="VitaMap home">
+          <Link href="/" className="flex items-center gap-3" aria-label="Organix home">
             <span className="grid size-9 place-items-center rounded-lg bg-[#113D3A] text-sm font-bold text-white">
-              V
+              O
             </span>
-            <span className="text-base font-semibold">VitaMap</span>
+            <span className="text-base font-semibold">Organix</span>
           </Link>
 
           <nav className="hidden items-center gap-7 text-sm font-semibold text-[#58606B] md:flex">
@@ -110,7 +110,7 @@ export default function HomePage() {
             </h1>
 
             <p className="mt-6 max-w-full text-base leading-7 text-[#58606B] sm:max-w-2xl sm:text-lg sm:leading-8">
-              VitaMap converts a full-body blood test into a simple body map,
+              Organix converts a full-body blood test into a simple body map,
               clear risk priorities, and a plan you can track every few months.
             </p>
 
@@ -159,7 +159,7 @@ export default function HomePage() {
             </h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-[#58606B]">
               Red means fix this, yellow means watch this, green means it is
-              currently fine. Tap an organ and VitaMap explains the issue in
+              currently fine. Tap an organ and Organix explains the issue in
               words a normal person would use.
             </p>
             <div className="mt-7 grid gap-3 sm:grid-cols-2">
@@ -178,7 +178,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#0F766E]">
-            How VitaMap works
+            How Organix works
           </p>
           <h2 className="mt-4 text-4xl font-semibold leading-tight tracking-normal sm:text-5xl">
             One test, then a clearer path forward.
@@ -249,7 +249,7 @@ export default function HomePage() {
             href="/signup"
             className="mt-6 inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-[#113D3A] px-4 text-sm font-semibold text-white transition hover:bg-[#0B2D2A]"
           >
-            Talk to VitaMap <ArrowRight size={16} />
+            Talk to Organix <ArrowRight size={16} />
           </Link>
         </div>
 
@@ -271,10 +271,10 @@ export default function HomePage() {
         <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
             <span className="grid size-9 place-items-center rounded-lg bg-[#113D3A] text-sm font-bold text-white">
-              V
+              O
             </span>
             <div>
-              <p className="font-semibold">VitaMap</p>
+              <p className="font-semibold">Organix</p>
               <p className="text-sm text-[#66707C]">Know what matters. Track what changes.</p>
             </div>
           </div>

@@ -33,7 +33,7 @@ export function HealthScore({ score }: { score: number }) {
           <span ref={ref} className="block text-5xl font-semibold tracking-[-0.03em] text-[#1D1D1F]">
             {value || score}
           </span>
-          <p className="mt-1 text-sm font-semibold text-[#6E6E73]">Your VitaScore</p>
+          <p className="mt-1 text-sm font-semibold text-[#6E6E73]">Your Organix Score</p>
         </div>
       </div>
       <p className="rounded-lg bg-[#F2F2F7] p-3 text-center text-sm text-[#6E6E73]">

@@ -182,7 +182,7 @@ export const categories = [
 
 export const howItWorks = [
   ["Book your first test", "At-home blood draw through a partner lab.", Stethoscope],
-  ["Get your VitaMap", "See which organs need attention in plain English.", Sparkles],
+  ["Get your Organix map", "See which organs need attention in plain English.", Sparkles],
   ["Track 10 markers", "Follow the few numbers that matter most to you.", CircleGauge],
   ["Watch progress", "Retest every 3 months and see what changed.", TimerReset],
 ];

@@ -28,7 +28,7 @@ export function DashboardClient() {
         >
           <div>
             <p className="text-sm font-semibold text-[#0F766E]">Member dashboard</p>
-            <h1 className="text-3xl font-semibold tracking-[-0.02em] text-[#1D1D1F] sm:text-4xl sm:tracking-[-0.03em]">My VitaMap</h1>
+            <h1 className="text-3xl font-semibold tracking-[-0.02em] text-[#1D1D1F] sm:text-4xl sm:tracking-[-0.03em]">My Organix</h1>
             <p className="mt-1 text-sm text-[#6E6E73]">
               Last full-body test: {memberData.lastTested}
             </p>
@@ -52,7 +52,7 @@ export function DashboardClient() {
             transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <p className="text-sm font-semibold leading-6 text-[#1D1D1F]">
-              Add a family member for Rs. 2,999/year - see their VitaMap too.
+              Add a family member for Rs. 2,999/year - see their Organix map too.
             </p>
             <button
               onClick={() => setShowFamilyBanner(false)}

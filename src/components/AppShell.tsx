@@ -34,10 +34,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <aside className="no-print fixed inset-y-0 left-0 z-30 hidden w-60 border-r border-[#E8E8E8] bg-[#FAFAFA] px-4 py-6 md:flex md:flex-col">
         <Link href="/" className="mb-8 flex items-center gap-3">
           <div className="flex size-10 items-center justify-center rounded-lg bg-[#0F766E] text-lg font-bold text-white">
-            V
+            O
           </div>
           <div>
-            <p className="text-lg font-semibold text-[#1D1D1F]">VitaMap</p>
+            <p className="text-lg font-semibold text-[#1D1D1F]">Organix</p>
             <p className="text-xs text-[#86868B]">Preventive health</p>
           </div>
         </Link>

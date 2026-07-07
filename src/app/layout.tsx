@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "VitaMap | Preventive health tracking",
+  title: "Organix | Preventive health tracking",
   description:
     "Know your body, understand your risk markers, and track preventive health progress in plain English.",
 };

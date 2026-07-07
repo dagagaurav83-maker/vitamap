@@ -106,7 +106,7 @@ function ScoreRing({ score, color, delay }: { score: number; color: string; dela
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ delay, duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
-      aria-label={`VitaScore ${score} out of 100`}
+      aria-label={`Organix Score ${score} out of 100`}
     >
       <svg className="absolute inset-0 -rotate-90" viewBox="0 0 56 56" aria-hidden="true">
         <circle cx="28" cy="28" r={radius} fill="none" stroke="#E5E5EA" strokeWidth="6" />
@@ -165,7 +165,7 @@ function FamilyComparisonCards() {
 
               <div className="mt-5">
                 <div className="flex items-end justify-between">
-                  <p className="text-sm font-semibold text-[#1D1D1F]">VitaScore</p>
+                  <p className="text-sm font-semibold text-[#1D1D1F]">Organix Score</p>
                   <p className="text-2xl font-semibold tracking-[-0.02em] text-[#1D1D1F]">
                     {person.score}
                   </p>
