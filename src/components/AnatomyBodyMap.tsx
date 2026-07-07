@@ -16,6 +16,13 @@ type OrganMaskPath = {
   strokeWidth?: number;
 };
 
+const maskDesignWidth = 1024;
+const maskDesignHeight = 1792;
+const imageWidth = anatomyReportMap.width;
+const imageHeight = anatomyReportMap.height;
+const maskScaleX = imageWidth / maskDesignWidth;
+const maskScaleY = imageHeight / maskDesignHeight;
+
 const organMasks: Record<string, { label: string; paths: OrganMaskPath[] }> = {
   heart: {
     label: "Heart and blood vessels",
@@ -38,13 +45,21 @@ const organMasks: Record<string, { label: string; paths: OrganMaskPath[] }> = {
     label: "Bones",
     paths: [
       { d: "M398 104c68-46 160-46 228 0 44 30 67 74 67 125 0 92-74 166-181 166S331 321 331 229c0-51 23-95 67-125Z" },
-      { d: "M408 357h208c39 0 70 31 70 70v254c0 39-31 70-70 70H408c-39 0-70-31-70-70V427c0-39 31-70 70-70Z" },
-      { d: "M134 385c72 6 130 58 146 128l82 356c12 51-20 101-71 113-51 12-101-20-113-71L91 533c-17-74-1-127 43-148Z" },
-      { d: "M890 385c-72 6-130 58-146 128l-82 356c-12 51 20 101 71 113 51 12 101-20 113-71l87-378c17-74 1-127-43-148Z" },
-      { d: "M319 857c66-18 133 22 149 88l101 427c16 66-25 133-91 148-66 16-132-25-148-91l-101-427c-16-66 24-129 90-145Z" },
-      { d: "M705 857c-66-18-133 22-149 88l-101 427c-16 66 25 133 91 148 66 16 132-25 148-91l101-427c16-66-24-129-90-145Z" },
-      { d: "M246 1394h196c42 0 76 34 76 76v242c0 42-34 76-76 76H246c-42 0-76-34-76-76v-242c0-42 34-76 76-76Z" },
-      { d: "M582 1394h196c42 0 76 34 76 76v242c0 42-34 76-76 76H582c-42 0-76-34-76-76v-242c0-42 34-76 76-76Z" },
+      { d: "M512 386v293", strokeWidth: 28 },
+      { d: "M345 422c104 58 230 58 334 0", strokeWidth: 28 },
+      { d: "M330 526c118 62 246 62 364 0", strokeWidth: 24 },
+      { d: "M302 655c136 46 284 46 420 0", strokeWidth: 24 },
+      { d: "M252 438c-40 114-70 244-96 420", strokeWidth: 28 },
+      { d: "M772 438c40 114 70 244 96 420", strokeWidth: 28 },
+      { d: "M156 858l-76 134", strokeWidth: 30 },
+      { d: "M868 858l76 134", strokeWidth: 30 },
+      { d: "M350 888c58 42 266 42 324 0", strokeWidth: 34 },
+      { d: "M376 932l-72 470", strokeWidth: 38 },
+      { d: "M648 932l72 470", strokeWidth: 38 },
+      { d: "M304 1402l-38 226", strokeWidth: 34 },
+      { d: "M720 1402l38 226", strokeWidth: 34 },
+      { d: "M238 1662c58 22 124 22 184 0", strokeWidth: 30 },
+      { d: "M602 1662c60 22 126 22 184 0", strokeWidth: 30 },
     ],
   },
 };
@@ -93,25 +108,27 @@ export function AnatomyBodyMap({
       />
       <svg
         className="pointer-events-none absolute inset-0 h-full w-full"
-        viewBox="0 0 1024 1792"
+        viewBox={`0 0 ${imageWidth} ${imageHeight}`}
         aria-hidden="true"
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
           {focusOrgans.map((organ) => (
             <mask key={organ.organ} id={`organMask-${organ.organ}`} maskUnits="userSpaceOnUse">
-              <rect width="1024" height="1792" fill="black" />
-              {organ.paths.map((path, index) => (
-                <path
-                  key={`${organ.organ}-${index}`}
-                  d={path.d}
-                  fill={path.strokeWidth ? "none" : "white"}
-                  stroke={path.strokeWidth ? "white" : "none"}
-                  strokeWidth={path.strokeWidth}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              ))}
+              <rect width={imageWidth} height={imageHeight} fill="black" />
+              <g transform={`scale(${maskScaleX} ${maskScaleY})`}>
+                {organ.paths.map((path, index) => (
+                  <path
+                    key={`${organ.organ}-${index}`}
+                    d={path.d}
+                    fill={path.strokeWidth ? "none" : "white"}
+                    stroke={path.strokeWidth ? "white" : "none"}
+                    strokeWidth={path.strokeWidth}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                ))}
+              </g>
             </mask>
           ))}
           {focusOrgans.map((organ) => (
@@ -142,8 +159,8 @@ export function AnatomyBodyMap({
           <g key={organ.organ} className="anatomy-real-organ" mask={`url(#organMask-${organ.organ})`}>
             <image
               href={anatomyReportMap.src}
-              width="1024"
-              height="1792"
+              width={imageWidth}
+              height={imageHeight}
               preserveAspectRatio="xMidYMid meet"
               filter={`url(#organGlow-${organ.organ})`}
               style={{ mixBlendMode: "multiply" }}
