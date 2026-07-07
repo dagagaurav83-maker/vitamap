@@ -19,26 +19,30 @@ export function DashboardClient() {
 
   return (
     <AppShell>
-      <div className="px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
+      <div className="px-4 py-5 sm:px-6 sm:py-7 lg:px-8">
         <motion.div
-          className="mb-5 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-end sm:justify-between"
+          className="mb-6 flex flex-col gap-4 sm:mb-7 sm:flex-row sm:items-end sm:justify-between"
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <div>
-            <p className="text-sm font-semibold text-[#0F766E]">Member dashboard</p>
-            <h1 className="text-3xl font-semibold tracking-[-0.02em] text-[#1D1D1F] sm:text-4xl sm:tracking-[-0.03em]">My Organix</h1>
-            <p className="mt-1 text-sm text-[#6E6E73]">
-              Last full-body test: {memberData.lastTested}
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0F766E]">Member dashboard</p>
+            <h1 className="mt-1 text-4xl font-semibold tracking-[-0.03em] text-[#101412] sm:text-5xl">
+              My Organix
+            </h1>
+            <p className="mt-2 text-sm text-[#65716B]">
+              Last full-body test: {memberData.lastTested} via {memberData.labPartner}
             </p>
           </div>
-          <div id="next-test" className="apple-card w-full rounded-xl p-4 sm:w-auto">
+          <div id="next-test" className="premium-card w-full rounded-2xl p-4 sm:w-auto">
             <div className="flex items-center gap-3">
-              <CalendarClock className="text-[#0F766E]" size={20} />
+              <div className="flex size-11 items-center justify-center rounded-2xl bg-[#E8F8EF] text-[#0F766E]">
+                <CalendarClock size={20} />
+              </div>
               <div>
-                <p className="text-sm font-semibold text-[#1D1D1F]">Next test due: {memberData.nextTestDue}</p>
-                <p className="text-xs text-[#86868B]">{memberData.daysToNextTest} days left</p>
+                <p className="text-sm font-semibold text-[#101412]">Next test due: {memberData.nextTestDue}</p>
+                <p className="text-xs text-[#65716B]">{memberData.daysToNextTest} days left</p>
               </div>
             </div>
           </div>
@@ -46,7 +50,7 @@ export function DashboardClient() {
 
         {showFamilyBanner && (
           <motion.div
-            className="no-print mb-6 flex flex-col gap-3 rounded-xl border border-[#0F766E]/15 bg-white p-4 sm:flex-row sm:items-center sm:justify-between"
+            className="no-print mb-6 flex flex-col gap-3 rounded-2xl border border-[#0F766E]/10 bg-[#F0FFF7]/82 p-4 shadow-sm backdrop-blur sm:flex-row sm:items-center sm:justify-between"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -56,7 +60,7 @@ export function DashboardClient() {
             </p>
             <button
               onClick={() => setShowFamilyBanner(false)}
-              className="self-start rounded-lg border border-[#E5E5EA] bg-white p-2 text-[#0F766E] transition hover:bg-[#F2F2F7] sm:self-auto"
+              className="self-start rounded-xl border border-[#0F766E]/10 bg-white/80 p-2 text-[#0F766E] transition hover:bg-white sm:self-auto"
               aria-label="Dismiss family add-on banner"
             >
               <X size={17} />
@@ -64,7 +68,7 @@ export function DashboardClient() {
           </motion.div>
         )}
 
-        <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
+        <section id="vitamap" className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
           <VitaMap selectedOrgan={selectedOrgan} onSelect={setSelectedOrgan} />
           <HealthScore score={memberData.score} />
         </section>
@@ -81,10 +85,10 @@ export function DashboardClient() {
         <section id="markers" className="mt-8">
           <div className="mb-4 flex items-end justify-between gap-4">
             <div>
-              <h2 className="text-xl font-semibold tracking-[-0.01em] text-[#1D1D1F] sm:text-2xl sm:tracking-[-0.02em]">
+              <h2 className="text-2xl font-semibold tracking-[-0.02em] text-[#101412] sm:text-3xl">
                 My 10 markers to track
               </h2>
-              <p className="mt-1 text-sm text-[#6E6E73]">
+              <p className="mt-1 text-sm text-[#65716B]">
                 Plain-language cards for the numbers that matter most.
               </p>
             </div>

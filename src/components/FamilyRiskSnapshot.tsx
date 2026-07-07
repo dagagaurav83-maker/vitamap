@@ -11,23 +11,23 @@ export function FamilyRiskSnapshot() {
   return (
     <motion.section
       id="family-risk"
-      className="apple-card rounded-xl p-5 sm:p-6"
-      initial={{ opacity: 0, y: 18 }}
+      className="premium-card rounded-[28px] p-5 sm:p-6"
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-start gap-3">
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[#E6FFFB] text-[#0F766E]">
+          <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[#E8F8EF] text-[#0F766E]">
             <UsersRound size={20} />
           </div>
           <div>
-            <p className="text-sm font-semibold text-[#0F766E]">Family risk snapshot</p>
-            <h2 className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-[#1D1D1F]">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0F766E]">Family risk snapshot</p>
+            <h2 className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-[#101412]">
               One view for shared risks
             </h2>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-[#6E6E73]">
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-[#65716B]">
               Track who needs attention, who is due for testing, and which family patterns are emerging.
             </p>
           </div>
@@ -35,13 +35,13 @@ export function FamilyRiskSnapshot() {
         <div className="flex flex-col gap-2 sm:flex-row">
           <button
             onClick={() => setCompareMode((current) => !current)}
-            className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#0F766E]/20 bg-[#E6FFFB] px-4 py-3 text-sm font-semibold text-[#0F766E] transition duration-200 hover:-translate-y-0.5 hover:bg-[#CCFBF1]"
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#0F766E]/20 bg-[#E8F8EF] px-4 py-3 text-sm font-semibold text-[#0F766E] transition duration-200 hover:-translate-y-0.5 hover:bg-[#DDF4EA]"
             aria-pressed={compareMode}
           >
             <ArrowRightLeft size={17} />
             {compareMode ? "Show snapshot" : "Compare family"}
           </button>
-          <button className="inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-4 py-3 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#115E59]">
+          <button className="flowing-green-cta inline-flex items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5">
             Add family member
           </button>
         </div>
@@ -60,8 +60,8 @@ function FamilySnapshotCards() {
         return (
           <motion.article
             key={person.name}
-            className="rounded-lg border border-[#E5E5EA] bg-white p-4"
-            initial={{ opacity: 0, y: 16 }}
+            className="rounded-2xl border border-[#0F766E]/10 bg-white/82 p-4 shadow-sm"
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.08, duration: 0.4 }}
@@ -84,7 +84,7 @@ function FamilySnapshotCards() {
               </div>
             </div>
 
-            <p className="mt-4 rounded-lg bg-[#F2F2F7] p-3 text-sm leading-6 text-[#6E6E73]">
+            <p className="mt-4 rounded-2xl bg-[#F3F7F5] p-3 text-sm leading-6 text-[#65716B]">
               Focus: {person.focus}
             </p>
           </motion.article>
@@ -102,7 +102,7 @@ function ScoreRing({ score, color, delay }: { score: number; color: string; dela
   return (
     <motion.div
       className="relative grid size-14 shrink-0 place-items-center"
-      initial={{ opacity: 0, x: -14 }}
+      initial={false}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ delay, duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -144,8 +144,8 @@ function FamilyComparisonCards() {
           return (
             <motion.article
               key={person.name}
-              className="min-w-[280px] rounded-xl border border-[#E5E5EA] bg-white p-4 shadow-sm lg:min-w-0"
-              initial={{ opacity: 0, y: 18 }}
+              className="min-w-[280px] rounded-2xl border border-[#0F766E]/10 bg-white/86 p-4 shadow-sm lg:min-w-0"
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.08, duration: 0.35 }}
             >

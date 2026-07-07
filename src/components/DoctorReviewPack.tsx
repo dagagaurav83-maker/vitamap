@@ -14,26 +14,26 @@ export function DoctorReviewPack({ compact = false }: { compact?: boolean }) {
   return (
     <motion.section
       id="doctor-review"
-      className="print-card apple-card rounded-xl p-5 sm:p-6"
-      initial={{ opacity: 0, y: 18 }}
+      className="print-card premium-card rounded-[28px] p-5 sm:p-6"
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="text-sm font-semibold text-[#0F766E]">Doctor review pack</p>
-          <h2 className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-[#1D1D1F]">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0F766E]">Doctor review pack</p>
+          <h2 className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-[#101412]">
             Take this to your next visit
           </h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-[#6E6E73]">
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-[#65716B]">
             A plain-English summary of what changed, what to ask, and what goal to
             track before {memberData.nextTestDue}.
           </p>
         </div>
         <button
           onClick={() => window.print()}
-          className="no-print inline-flex items-center justify-center gap-2 rounded-lg border border-[#D1D1D6] bg-white px-4 py-3 text-sm font-semibold text-[#1D1D1F] transition duration-200 hover:-translate-y-0.5 hover:bg-[#F2F2F7]"
+          className="no-print inline-flex items-center justify-center gap-2 rounded-xl border border-[#0F766E]/12 bg-white/82 px-4 py-3 text-sm font-semibold text-[#101412] shadow-sm transition duration-200 hover:-translate-y-0.5 hover:bg-white"
         >
           <Printer size={17} />
           Print pack
@@ -41,7 +41,7 @@ export function DoctorReviewPack({ compact = false }: { compact?: boolean }) {
       </div>
 
       <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_0.85fr]">
-        <div className="rounded-lg bg-[#F2F2F7] p-4">
+        <div className="rounded-2xl bg-[#F3F7F5] p-4">
           <div className="flex items-start gap-3">
             <FileText className="mt-0.5 text-[#0F766E]" size={20} />
             <div>
@@ -58,7 +58,7 @@ export function DoctorReviewPack({ compact = false }: { compact?: boolean }) {
           )}
         </div>
 
-        <div className="rounded-lg border border-[#E5E5EA] p-4">
+        <div className="rounded-2xl border border-[#0F766E]/10 bg-white/78 p-4 shadow-sm">
           <div className="flex items-start gap-3">
             <ClipboardList className="mt-0.5 text-[#0F766E]" size={20} />
             <div>
@@ -75,8 +75,8 @@ export function DoctorReviewPack({ compact = false }: { compact?: boolean }) {
           return (
             <motion.article
               key={item.marker}
-              className={`rounded-lg border p-4 ${styles.border} ${styles.bg}`}
-              initial={{ opacity: 0, y: 14 }}
+              className={`rounded-2xl border p-4 ${styles.border} ${styles.bg}`}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.06, duration: 0.35 }}
@@ -97,7 +97,7 @@ export function DoctorReviewPack({ compact = false }: { compact?: boolean }) {
         })}
       </div>
 
-      <div className="mt-5 rounded-lg border border-[#E5E5EA] bg-white p-4">
+      <div className="mt-5 rounded-2xl border border-[#0F766E]/10 bg-white/82 p-4 shadow-sm">
         <div className="flex items-start gap-3">
           <Pill className="mt-0.5 text-[#0F766E]" size={20} />
           <div>
@@ -111,7 +111,7 @@ export function DoctorReviewPack({ compact = false }: { compact?: boolean }) {
           {supplementMedicationPlan.map((item) => {
             const styles = statusStyles[item.color as StatusColor];
             return (
-              <article key={item.id} className={`rounded-lg border p-3 ${styles.border} ${styles.bg}`}>
+              <article key={item.id} className={`rounded-2xl border p-3 ${styles.border} ${styles.bg}`}>
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-sm font-semibold text-[#1D1D1F]">{item.name}</p>

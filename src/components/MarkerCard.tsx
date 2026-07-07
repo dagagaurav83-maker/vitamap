@@ -30,16 +30,16 @@ export function MarkerCard({ marker }: { marker: Marker }) {
   return (
     <>
       <motion.article
-        initial={{ opacity: 0, y: 34 }}
+        initial={false}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className={`print-card apple-card min-w-[240px] rounded-xl p-4 ${styles.border}`}
+        className={`print-card apple-card min-w-[250px] rounded-2xl p-4 ${styles.border}`}
       >
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h3 className="font-bold text-slate-950">{marker.friendlyName}</h3>
-            <p className="mt-1 text-xs text-slate-500">{marker.value}</p>
+            <h3 className="font-semibold tracking-[-0.01em] text-[#101412]">{marker.friendlyName}</h3>
+            <p className="mt-1 text-xs font-semibold text-[#65716B]">{marker.value}</p>
           </div>
           <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${styles.bg} ${styles.text}`}>
             {marker.status === "high"
@@ -52,10 +52,10 @@ export function MarkerCard({ marker }: { marker: Marker }) {
           </span>
         </div>
 
-        <div className="mt-5 h-20 overflow-hidden">
+        <div className="mt-5 h-20 overflow-hidden rounded-2xl bg-gradient-to-b from-[#F8FBFA] to-white">
           <motion.div
             className="relative mx-auto h-20 w-36"
-            initial={{ opacity: 0, y: 18 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -64,7 +64,7 @@ export function MarkerCard({ marker }: { marker: Marker }) {
               <path
                 d="M24 68 A48 48 0 0 1 120 68"
                 fill="none"
-                stroke="#EEF2F7"
+                stroke="#E8EFEA"
                 strokeLinecap="round"
                 strokeWidth="14"
               />
@@ -84,13 +84,13 @@ export function MarkerCard({ marker }: { marker: Marker }) {
           </motion.div>
         </div>
 
-        <p className="mt-4 line-clamp-2 text-sm leading-6 text-slate-600">{marker.plainText}</p>
+        <p className="mt-4 line-clamp-2 text-sm leading-6 text-[#65716B]">{marker.plainText}</p>
         <button
           onClick={() => setOpen(true)}
-          className="no-print mt-4 inline-flex items-center gap-2 text-sm font-semibold text-teal-700 hover:text-teal-900"
+          className="no-print mt-4 inline-flex items-center gap-2 rounded-full bg-[#E8F8EF] px-3 py-2 text-xs font-semibold text-[#0F766E] transition hover:bg-[#DDF4EA] hover:text-[#063F3A]"
         >
           <HelpCircle size={16} />
-          Explain this to me
+          Explain
         </button>
       </motion.article>
 

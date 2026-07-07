@@ -63,24 +63,24 @@ export default function HomePage() {
   const [selectedOrgan, setSelectedOrgan] = useState("heart");
 
   return (
-    <main className="relative isolate min-h-screen overflow-hidden bg-[#F7F8FA] pb-24 text-[#16181D] md:pb-0">
-      <div className="flowing-home-gradient pointer-events-none absolute inset-x-0 top-0 -z-10 h-[720px]" />
+    <main className="soft-page-bg relative isolate min-h-screen overflow-hidden pb-28 text-[#16181D] md:pb-0">
+      <div className="flowing-home-gradient pointer-events-none absolute inset-x-0 top-0 -z-10 h-[760px]" />
       <header className="sticky top-0 z-50">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <BrandLogo logoClassName="h-12 w-auto" />
 
-          <nav className="hidden items-center gap-7 text-sm font-semibold text-[#58606B] md:flex">
+          <nav className="hidden items-center gap-2 rounded-full border border-white/70 bg-white/58 p-1 text-sm font-semibold text-[#58606B] shadow-sm backdrop-blur-xl md:flex">
             <a className="transition hover:text-[#16181D]" href="#product">
-              Product
+              <span className="block rounded-full px-4 py-2">Product</span>
             </a>
             <a className="transition hover:text-[#16181D]" href="#plans">
-              Plans
+              <span className="block rounded-full px-4 py-2">Plans</span>
             </a>
             <a className="transition hover:text-[#16181D]" href="#teams">
-              For teams
+              <span className="block rounded-full px-4 py-2">Teams</span>
             </a>
             <Link className="transition hover:text-[#16181D]" href="/dashboard">
-              Demo
+              <span className="block rounded-full px-4 py-2">Demo</span>
             </Link>
           </nav>
 
@@ -94,14 +94,14 @@ export default function HomePage() {
       </header>
 
       <section className="relative">
-        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pb-16 pt-12 sm:px-6 sm:pt-16 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:pb-20 lg:pt-20">
+        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-4 pb-16 pt-8 sm:px-6 sm:pt-14 lg:grid-cols-[0.88fr_1.12fr] lg:px-8 lg:pb-20 lg:pt-16">
           <div className="min-w-0 w-[min(340px,calc(100vw-32px))] sm:w-auto sm:max-w-none">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#B7D9D2] bg-white px-3 py-1.5 text-xs font-semibold text-[#0F766E] shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#B7D9D2] bg-white/78 px-3 py-1.5 text-xs font-semibold text-[#0F766E] shadow-sm backdrop-blur">
               <span className="size-2 rounded-full bg-[#30D158]" />
               Preventive health for urban India
             </div>
 
-            <h1 className="mt-5 max-w-full break-words text-[36px] font-semibold leading-[1.08] tracking-normal text-[#111317] sm:max-w-3xl sm:text-6xl lg:text-7xl">
+            <h1 className="mt-5 max-w-full break-words text-[40px] font-semibold leading-[1.02] tracking-[-0.02em] text-[#0D1412] sm:max-w-3xl sm:text-6xl lg:text-[76px]">
               See what your body needs before it becomes a problem.
             </h1>
 
@@ -113,13 +113,13 @@ export default function HomePage() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/signup"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#113D3A] px-5 text-sm font-semibold text-white shadow-[0_16px_36px_rgba(17,61,58,0.18)] transition hover:-translate-y-0.5 hover:bg-[#0B2D2A]"
+                className="flowing-green-cta inline-flex h-12 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold text-white transition hover:-translate-y-0.5"
               >
                 Get your health mapped <ArrowRight size={17} />
               </Link>
               <Link
                 href="/dashboard"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-[#D7DCE2] bg-white px-5 text-sm font-semibold text-[#16181D] transition hover:-translate-y-0.5 hover:border-[#BFC7D0]"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-white/80 bg-white/78 px-5 text-sm font-semibold text-[#16181D] shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:bg-white"
               >
                 Open demo dashboard <ChevronRight size={17} />
               </Link>
@@ -129,10 +129,10 @@ export default function HomePage() {
               {proofPoints.map(([value, label]) => (
                 <div
                   key={label}
-                  className="min-w-0 rounded-lg border border-[#E2E6EA] bg-white p-4 shadow-sm"
+                  className="min-w-0 rounded-2xl border border-white/72 bg-white/72 p-4 shadow-sm backdrop-blur"
                 >
-                  <p className="text-2xl font-semibold text-[#113D3A]">{value}</p>
-                  <p className="mt-1 text-xs leading-5 text-[#66707C]">{label}</p>
+                  <p className="text-2xl font-semibold text-[#063F3A]">{value}</p>
+                  <p className="mt-1 text-xs font-medium leading-5 text-[#66707C]">{label}</p>
                 </div>
               ))}
             </div>
@@ -144,13 +144,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="product" className="border-y border-[#E2E6EA] bg-white py-14">
+      <section id="product" className="py-16">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
           <div className="self-center">
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#0F766E]">
               The product moment
             </p>
-            <h2 className="mt-4 max-w-xl text-4xl font-semibold leading-tight tracking-normal sm:text-5xl">
+            <h2 className="mt-4 max-w-xl text-4xl font-semibold leading-tight tracking-[-0.02em] text-[#101412] sm:text-5xl">
               A live body map that makes your report obvious.
             </h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-[#58606B]">
@@ -160,8 +160,10 @@ export default function HomePage() {
             </p>
             <div className="mt-7 grid gap-3 sm:grid-cols-2">
               {categories.slice(0, 4).map(([label, Icon]) => (
-                <div key={label as string} className="flex items-center gap-3 rounded-lg border border-[#E2E6EA] bg-[#F8FAFB] p-3">
-                  <Icon className="text-[#0F766E]" size={20} />
+                <div key={label as string} className="flex items-center gap-3 rounded-2xl border border-white/76 bg-white/74 p-3 shadow-sm backdrop-blur">
+                  <span className="flex size-9 items-center justify-center rounded-xl bg-[#E8F8EF]">
+                    <Icon className="text-[#0F766E]" size={19} />
+                  </span>
                   <span className="text-sm font-semibold text-[#29313A]">{label as string}</span>
                 </div>
               ))}
@@ -176,7 +178,7 @@ export default function HomePage() {
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#0F766E]">
             How Organix works
           </p>
-          <h2 className="mt-4 text-4xl font-semibold leading-tight tracking-normal sm:text-5xl">
+          <h2 className="mt-4 text-4xl font-semibold leading-tight tracking-[-0.02em] text-[#101412] sm:text-5xl">
             One test, then a clearer path forward.
           </h2>
         </div>
@@ -184,13 +186,13 @@ export default function HomePage() {
           {journey.map((item, index) => (
             <motion.article
               key={item.title}
-              className="rounded-lg border border-[#E2E6EA] bg-white p-5 shadow-sm"
-              initial={{ opacity: 0, y: 18 }}
+              className="premium-card rounded-2xl p-5"
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.07, duration: 0.38 }}
             >
-              <div className="flex size-10 items-center justify-center rounded-lg bg-[#EAF7F3] text-[#0F766E]">
+              <div className="flex size-11 items-center justify-center rounded-2xl bg-[#EAF7F3] text-[#0F766E]">
                 <item.icon size={20} />
               </div>
               <p className="mt-5 text-sm font-semibold text-[#8B949F]">0{index + 1}</p>
@@ -201,7 +203,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="plans" className="bg-[#101820] py-16 text-white">
+      <section id="plans" className="bg-[#0B1614] py-16 text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div>
@@ -227,9 +229,9 @@ export default function HomePage() {
       </section>
 
       <section id="teams" className="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
-        <div className="rounded-lg border border-[#E2E6EA] bg-white p-6 shadow-sm">
+        <div className="premium-card rounded-3xl p-6">
           <div className="flex items-center gap-3">
-            <div className="flex size-11 items-center justify-center rounded-lg bg-[#EAF7F3] text-[#0F766E]">
+            <div className="flex size-12 items-center justify-center rounded-2xl bg-[#EAF7F3] text-[#0F766E]">
               <Building2 size={22} />
             </div>
             <div>
@@ -251,7 +253,7 @@ export default function HomePage() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           {trustSignals.map((item) => (
-            <div key={item.label} className="rounded-lg border border-[#E2E6EA] bg-white p-5 shadow-sm">
+            <div key={item.label} className="premium-card rounded-2xl p-5">
               <item.icon className="text-[#0F766E]" size={22} />
               <p className="mt-4 text-base font-semibold">{item.label}</p>
               <p className="mt-2 text-sm leading-6 text-[#66707C]">
@@ -296,12 +298,12 @@ function PriceCard({
 
   return (
     <motion.article
-      className={`rounded-lg border p-5 ${
+      className={`rounded-2xl border p-5 ${
         plan.popular
           ? "border-[#85E0D2] bg-white text-[#16181D]"
           : "border-white/12 bg-white/[0.06] text-white"
       }`}
-      initial={{ opacity: 0, y: 18 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.08, duration: 0.38 }}
@@ -315,7 +317,7 @@ function PriceCard({
         )}
       </div>
       <p className="mt-5 text-4xl font-semibold tracking-normal">
-        Rs. <span ref={ref}>{value.toLocaleString("en-IN")}</span>
+        Rs. <span ref={ref}>{(value || amount).toLocaleString("en-IN")}</span>
       </p>
       <p className={`mt-2 text-sm ${plan.popular ? "text-[#66707C]" : "text-white/62"}`}>
         per year

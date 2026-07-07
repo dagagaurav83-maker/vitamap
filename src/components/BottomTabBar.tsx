@@ -20,7 +20,7 @@ export function BottomTabBar() {
   const activePath = normalizePath(usePathname());
 
   return (
-    <nav className="no-print fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-[#E5E5EA] bg-white/95 px-2 py-2 shadow-lg backdrop-blur md:hidden">
+    <nav className="no-print fixed inset-x-3 bottom-3 z-40 grid grid-cols-4 rounded-2xl border border-white/70 bg-white/88 p-1.5 shadow-[0_18px_55px_rgba(15,23,42,0.16)] backdrop-blur-xl md:hidden">
       {navItems.map((item) => {
         const active = activePath === item.href;
         const Icon = item.icon;
@@ -30,10 +30,10 @@ export function BottomTabBar() {
             key={item.label}
             href={item.href}
             aria-current={active ? "page" : undefined}
-            className={`flex min-w-0 flex-col items-center gap-1 rounded-lg px-1 py-2 text-[10px] font-semibold transition duration-200 ${
+            className={`flex min-w-0 flex-col items-center gap-1 rounded-xl px-1 py-2 text-[10px] font-semibold transition duration-200 ${
               active
-                ? "bg-[#DCFCE7] text-[#15803D] shadow-[inset_0_0_0_1px_rgba(21,128,61,0.18)]"
-                : "text-[#6E6E73]"
+                ? "flowing-green-cta text-white shadow-[0_12px_28px_rgba(15,118,110,0.24)]"
+                : "text-[#6E6E73] hover:bg-[#F3F7F5] hover:text-[#1D1D1F]"
             }`}
           >
             <Icon size={20} strokeWidth={active ? 2.6 : 2} />
