@@ -9,6 +9,7 @@ type Marker = {
   friendlyName: string;
   name?: string;
   value: string;
+  gaugeScore?: number;
   status: string;
   organ?: string;
   linkedOrgan?: string;
@@ -23,15 +24,15 @@ export function MarkerCard({ marker }: { marker: Marker }) {
   const [open, setOpen] = useState(false);
   const color = marker.status === "good" ? "green" : marker.status === "borderline" ? "yellow" : "red";
   const styles = statusStyles[color];
-  const percent = marker.status === "good" ? 78 : marker.status === "borderline" ? 58 : 82;
+  const percent = Math.max(8, Math.min(100, marker.gaugeScore ?? 70));
 
   return (
     <>
       <motion.article
-        initial={{ opacity: 0, y: 18 }}
+        initial={{ opacity: 0, y: 34 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+        transition={{ duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={`print-card apple-card min-w-[240px] rounded-xl p-4 ${styles.border}`}
       >
         <div className="flex items-start justify-between gap-3">
@@ -50,24 +51,36 @@ export function MarkerCard({ marker }: { marker: Marker }) {
           </span>
         </div>
 
-        <div className="mt-5 h-16 overflow-hidden">
-          <div className="relative mx-auto size-28 rounded-full border-[12px] border-slate-100">
-            <motion.div
-              className="absolute inset-[-12px] rounded-full border-[12px] border-transparent"
-              initial={{ clipPath: "inset(0 100% 0 0)" }}
-              whileInView={{ clipPath: "inset(0 0% 0 0)" }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-              style={{
-                borderTopColor: styles.fill,
-                borderRightColor: percent > 50 ? styles.fill : "transparent",
-                transform: "rotate(225deg)",
-              }}
-            />
-            <div className="absolute inset-0 flex items-center justify-center text-sm font-bold text-slate-700">
+        <div className="mt-5 h-20 overflow-hidden">
+          <motion.div
+            className="relative mx-auto h-20 w-36"
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            <svg className="h-full w-full" viewBox="0 0 144 80" aria-hidden="true">
+              <path
+                d="M24 68 A48 48 0 0 1 120 68"
+                fill="none"
+                stroke="#EEF2F7"
+                strokeLinecap="round"
+                strokeWidth="14"
+              />
+              <path
+                d="M24 68 A48 48 0 0 1 120 68"
+                fill="none"
+                pathLength={100}
+                stroke={styles.fill}
+                strokeDasharray={`${percent} ${100 - percent}`}
+                strokeLinecap="round"
+                strokeWidth="14"
+              />
+            </svg>
+            <div className="absolute inset-x-0 bottom-1 flex items-center justify-center text-sm font-bold text-slate-700">
               {percent}
             </div>
-          </div>
+          </motion.div>
         </div>
 
         <p className="mt-4 line-clamp-2 text-sm leading-6 text-slate-600">{marker.plainText}</p>

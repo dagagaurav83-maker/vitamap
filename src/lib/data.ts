@@ -67,6 +67,7 @@ export const memberData = {
       name: "LDL Cholesterol",
       friendlyName: "Bad Cholesterol",
       value: "148 mg/dL",
+      gaugeScore: 82,
       status: "high",
       organ: "heart",
       linkedOrgan: "Heart",
@@ -85,6 +86,7 @@ export const memberData = {
       name: "Vitamin D",
       friendlyName: "Vitamin D",
       value: "14 ng/mL",
+      gaugeScore: 91,
       status: "low",
       organ: "bones",
       linkedOrgan: "Bones",
@@ -103,6 +105,7 @@ export const memberData = {
       name: "HbA1c",
       friendlyName: "Blood Sugar",
       value: "5.9%",
+      gaugeScore: 63,
       status: "borderline",
       organ: "pancreas",
       linkedOrgan: "Pancreas",
@@ -121,13 +124,13 @@ export const memberData = {
 };
 
 export const healthyMarkers = [
-  { friendlyName: "Liver Enzymes", value: "Normal", status: "good" },
-  { friendlyName: "Kidney Function", value: "Normal", status: "good" },
-  { friendlyName: "Thyroid", value: "Normal", status: "good" },
-  { friendlyName: "Inflammation", value: "Low", status: "good" },
-  { friendlyName: "Hemoglobin", value: "14.2 g/dL", status: "good" },
-  { friendlyName: "B12", value: "Good", status: "good" },
-  { friendlyName: "Triglycerides", value: "Good", status: "good" },
+  { friendlyName: "Liver Enzymes", value: "Normal", status: "good", gaugeScore: 74 },
+  { friendlyName: "Kidney Function", value: "Normal", status: "good", gaugeScore: 88 },
+  { friendlyName: "Thyroid", value: "Normal", status: "good", gaugeScore: 69 },
+  { friendlyName: "Inflammation", value: "Low", status: "good", gaugeScore: 57 },
+  { friendlyName: "Hemoglobin", value: "14.2 g/dL", status: "good", gaugeScore: 81 },
+  { friendlyName: "B12", value: "Good", status: "good", gaugeScore: 72 },
+  { friendlyName: "Triglycerides", value: "Good", status: "good", gaugeScore: 66 },
 ];
 
 export const markerCards = [
