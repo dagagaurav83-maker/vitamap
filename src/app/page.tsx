@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { BottomTabBar } from "@/components/BottomTabBar";
+import { TopDock } from "@/components/TopDock";
 import { VitaMap } from "@/components/VitaMap";
 import { useCountUp } from "@/components/motion-utils";
 import { categories, pricingPlans } from "@/lib/data";
@@ -69,20 +70,7 @@ export default function HomePage() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <BrandLogo logoClassName="h-12 w-auto" />
 
-          <nav className="hidden items-center gap-2 rounded-full border border-white/70 bg-white/58 p-1 text-sm font-semibold text-[#58606B] shadow-sm backdrop-blur-xl md:flex">
-            <a className="transition hover:text-[#16181D]" href="#product">
-              <span className="block rounded-full px-4 py-2">Product</span>
-            </a>
-            <a className="transition hover:text-[#16181D]" href="#plans">
-              <span className="block rounded-full px-4 py-2">Plans</span>
-            </a>
-            <a className="transition hover:text-[#16181D]" href="#teams">
-              <span className="block rounded-full px-4 py-2">Teams</span>
-            </a>
-            <Link className="transition hover:text-[#16181D]" href="/dashboard">
-              <span className="block rounded-full px-4 py-2">Demo</span>
-            </Link>
-          </nav>
+          <TopDock className="hidden md:flex" />
 
           <Link
             href="/signup"

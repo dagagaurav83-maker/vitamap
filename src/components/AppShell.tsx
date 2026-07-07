@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { BottomTabBar } from "@/components/BottomTabBar";
+import { TopDock } from "@/components/TopDock";
 import { memberData } from "@/lib/data";
 
 const navItems = [
@@ -84,7 +85,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </aside>
 
-      <main className="pb-28 md:ml-64 md:pb-0">{children}</main>
+      <div className="no-print fixed inset-x-0 top-3 z-50 px-3 md:left-64 md:top-4">
+        <TopDock />
+      </div>
+
+      <main className="pb-28 pt-24 md:ml-64 md:pb-0 md:pt-28">{children}</main>
 
       <BottomTabBar />
 
