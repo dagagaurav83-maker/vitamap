@@ -78,9 +78,8 @@ export function MarkerCard({ marker }: { marker: Marker }) {
                 strokeWidth="14"
               />
             </svg>
-            <div className="absolute inset-x-0 bottom-0 flex flex-col items-center justify-center leading-none">
-              <span className="text-sm font-bold text-slate-800">{healthScore}/100</span>
-              <span className="mt-1 text-[10px] font-semibold uppercase text-slate-500">Health score</span>
+            <div className="absolute inset-x-0 bottom-0 flex items-center justify-center leading-none">
+              <span className="text-lg font-bold text-slate-800">{healthScore}</span>
             </div>
           </motion.div>
         </div>
