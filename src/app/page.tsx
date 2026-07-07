@@ -17,6 +17,7 @@ import {
   TestTube2,
   TimerReset,
 } from "lucide-react";
+import { BottomTabBar } from "@/components/BottomTabBar";
 import { VitaMap } from "@/components/VitaMap";
 import { useCountUp } from "@/components/motion-utils";
 import { categories, pricingPlans } from "@/lib/data";
@@ -61,7 +62,7 @@ export default function HomePage() {
   const [selectedOrgan, setSelectedOrgan] = useState("heart");
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#F7F8FA] text-[#16181D]">
+    <main className="min-h-screen overflow-hidden bg-[#F7F8FA] pb-24 text-[#16181D] md:pb-0">
       <header className="sticky top-0 z-50 border-b border-[#E2E6EA]/80 bg-[#F7F8FA]/88 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-3" aria-label="VitaMap home">
@@ -290,6 +291,7 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+      <BottomTabBar />
     </main>
   );
 }

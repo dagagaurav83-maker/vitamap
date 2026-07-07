@@ -10,6 +10,7 @@ import {
   Share2,
   UserRound,
 } from "lucide-react";
+import { BottomTabBar } from "@/components/BottomTabBar";
 import { memberData } from "@/lib/data";
 
 const navItems = [
@@ -87,24 +88,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       <main className="pb-24 md:ml-60 md:pb-0">{children}</main>
 
-      <nav className="no-print fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-[#E5E5EA] bg-white/95 px-2 py-2 shadow-lg backdrop-blur md:hidden">
-        {navItems.map((item) => {
-          const active = isNavItemActive(item.href);
-          const Icon = item.icon;
-          return (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={`flex min-w-0 flex-col items-center gap-1 rounded-lg px-1 py-2 text-[10px] font-semibold transition duration-200 ${
-                active ? "bg-[#E6FFFB] text-[#0F766E]" : "text-[#6E6E73]"
-              }`}
-            >
-              <Icon size={20} strokeWidth={active ? 2.5 : 2} />
-              <span className="max-w-full text-center leading-tight">{item.label}</span>
-            </Link>
-          );
-        })}
-      </nav>
+      <BottomTabBar />
 
       <button
         onClick={() => window.print()}
