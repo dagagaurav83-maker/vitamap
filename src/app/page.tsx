@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -20,10 +19,10 @@ import {
   TimerReset,
   TrendingDown,
 } from "lucide-react";
+import { AnatomyBodyMap } from "@/components/AnatomyBodyMap";
 import { VitaMap } from "@/components/VitaMap";
 import { useCountUp } from "@/components/motion-utils";
-import anatomyReportMap from "../../public/images/anatomy-report-map-v1.png";
-import { categories, memberData, pricingPlans, statusStyles, type StatusColor } from "@/lib/data";
+import { categories, memberData, pricingPlans, statusStyles } from "@/lib/data";
 
 const proofPoints = [
   ["60-100", "blood markers mapped"],
@@ -61,12 +60,6 @@ const trustSignals = [
   { label: "Made for Indian families", icon: ShieldCheck },
 ];
 
-const organHotspots: Record<string, { x: string; y: string; size: string; shape?: string }> = {
-  heart: { x: "50%", y: "33%", size: "42px" },
-  pancreas: { x: "51%", y: "45%", size: "64px", shape: "h-8 rounded-full" },
-  bones: { x: "50%", y: "51%", size: "76%", shape: "h-[88%] rounded-[44%]" },
-};
-
 const demoRows = memberData.flaggedMarkers.map((marker) => {
   const organStatus = memberData.organStatus[marker.organ] ?? "yellow";
 
@@ -79,15 +72,6 @@ const demoRows = memberData.flaggedMarkers.map((marker) => {
     severity: organStatus,
   };
 });
-
-const focusOrgans = demoRows
-  .map((row) => ({
-    ...row,
-    hotspot: organHotspots[row.organ],
-  }))
-  .filter((row): row is typeof row & { hotspot: NonNullable<typeof row.hotspot>; severity: StatusColor } =>
-    Boolean(row.hotspot),
-  );
 
 export default function HomePage() {
   const [selectedOrgan, setSelectedOrgan] = useState("heart");
@@ -197,35 +181,11 @@ export default function HomePage() {
                     </div>
                     <div className="relative mx-auto h-72 max-w-[220px] overflow-hidden rounded-lg bg-[#081016] sm:h-80 sm:max-w-[240px]">
                       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(133,224,210,0.18),rgba(8,16,22,0)_68%)]" />
-                      <Image
-                        src={anatomyReportMap}
-                        alt="Greyed anatomy body map with glowing report focus organs"
-                        priority
-                        sizes="(max-width: 640px) 220px, 240px"
-                        className="relative z-10 mx-auto h-full w-auto max-w-none select-none object-contain opacity-85 grayscale contrast-90 brightness-90"
+                      <AnatomyBodyMap
+                        className="relative z-10 mx-auto h-full w-auto"
+                        imageClassName="h-full w-auto max-w-none opacity-42 grayscale contrast-90 brightness-90 saturate-0"
                       />
                       <div className="absolute inset-0 z-20 bg-[#081016]/5" />
-                      {focusOrgans.map((organ) => (
-                        <span
-                          key={organ.organ}
-                          className={`focus-organ-glow pointer-events-none absolute z-30 ${
-                            organ.hotspot.shape ?? "rounded-full"
-                          }`}
-                          style={{
-                            left: organ.hotspot.x,
-                            top: organ.hotspot.y,
-                            width: organ.hotspot.size,
-                            height: organ.hotspot.shape ? undefined : organ.hotspot.size,
-                            backgroundColor: organ.organ === "bones" ? "transparent" : organ.color,
-                            boxShadow:
-                              organ.organ === "bones"
-                                ? `inset 0 0 26px ${organ.color}, 0 0 34px ${organ.color}`
-                                : `0 0 22px ${organ.color}, 0 0 44px ${organ.color}`,
-                            border: organ.organ === "bones" ? `2px solid ${organ.color}` : undefined,
-                            opacity: organ.organ === "bones" ? 0.58 : undefined,
-                          }}
-                        />
-                      ))}
                       <div className="absolute inset-x-0 bottom-0 z-30 h-20 bg-[linear-gradient(180deg,rgba(8,16,22,0),rgba(8,16,22,0.88))]" />
                     </div>
                   </div>

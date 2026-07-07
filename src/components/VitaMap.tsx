@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import anatomyReportMap from "../../public/images/anatomy-report-map-v1.png";
+import { AnatomyBodyMap } from "@/components/AnatomyBodyMap";
 import { memberData, statusStyles, type StatusColor } from "@/lib/data";
 
 type VitaMapProps = {
@@ -123,32 +122,11 @@ export function VitaMap({ selectedOrgan, onSelect, compact = false }: VitaMapPro
 }
 
 function AnatomySvg({ selectedOrgan, onSelect }: Pick<VitaMapProps, "selectedOrgan" | "onSelect">) {
-  const hotspots = [
-    { id: "bones", label: "Bones", className: "left-[13%] top-[3%] h-[92%] w-[74%]" },
-    { id: "heart", label: "Heart", className: "left-[43%] top-[27%] h-[10%] w-[16%]" },
-    { id: "pancreas", label: "Pancreas", className: "left-[36%] top-[38%] h-[8%] w-[28%]" },
-  ];
-
   return (
-    <div className="relative h-auto w-[258px] max-w-full sm:h-full sm:max-h-[650px] sm:w-full sm:max-w-[380px]">
-      <Image
-        src={anatomyReportMap}
-        alt="Front-view anatomy body scan with red cardiovascular and bone highlights, amber pancreas highlight, and muted healthy organs"
-        priority
-        sizes="(max-width: 640px) 258px, 380px"
-        className="h-auto w-full select-none object-contain drop-shadow-[0_18px_35px_rgba(15,23,42,0.08)]"
-      />
-      {hotspots.map((hotspot) => (
-        <button
-          key={hotspot.id}
-          type="button"
-          onClick={() => onSelect(hotspot.id)}
-          className={`absolute rounded-full transition ${
-            selectedOrgan === hotspot.id ? "ring-2 ring-white/80 ring-offset-2 ring-offset-transparent" : ""
-          } ${hotspot.className}`}
-          aria-label={`Open ${hotspot.label} details`}
-        />
-      ))}
-    </div>
+    <AnatomyBodyMap
+      selectedOrgan={selectedOrgan}
+      onSelect={onSelect}
+      imageClassName="opacity-60 grayscale contrast-75 saturate-0 drop-shadow-[0_18px_35px_rgba(15,23,42,0.08)]"
+    />
   );
 }
