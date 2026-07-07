@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { OrganixIcon } from "@/components/BrandLogo";
 import { pricingPlans } from "@/lib/data";
 
 const reasons = [
@@ -30,7 +31,8 @@ export default function SignupPage() {
       <div className="mx-auto max-w-4xl">
         <Link href="/" className="inline-flex items-center gap-2 text-sm font-bold text-teal-700">
           <ArrowLeft size={16} />
-          Organix
+          <OrganixIcon className="size-8" />
+          <span className="organix-wordmark text-lg text-[#1D1D1F]">Organix</span>
         </Link>
 
         <div className="mt-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:mt-8 sm:p-8">
