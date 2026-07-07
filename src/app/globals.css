@@ -182,6 +182,22 @@ select {
   animation: anatomyAlertPulse 1.45s ease-in-out infinite;
 }
 
+@keyframes anatomyRealOrganPulse {
+  0%,
+  100% {
+    opacity: 0.78;
+    filter: saturate(1.08) brightness(1);
+  }
+  50% {
+    opacity: 1;
+    filter: saturate(1.35) brightness(1.08);
+  }
+}
+
+.anatomy-real-organ {
+  animation: anatomyRealOrganPulse 1.55s ease-in-out infinite;
+}
+
 @keyframes focusOrganBlink {
   0%,
   100% {

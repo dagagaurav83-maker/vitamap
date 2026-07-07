@@ -11,20 +11,41 @@ type AnatomyBodyMapProps = {
   imageClassName?: string;
 };
 
-const organPaths: Record<string, { label: string; path: string; strokeWidth?: number }> = {
+type OrganMaskPath = {
+  d: string;
+  strokeWidth?: number;
+};
+
+const organMasks: Record<string, { label: string; paths: OrganMaskPath[] }> = {
   heart: {
-    label: "Heart",
-    path: "M498 560c-44-58-126-20-126 58 0 91 89 129 139 199 52-70 140-108 140-199 0-78-82-116-126-58l-14 20-13-20Z",
+    label: "Heart and blood vessels",
+    paths: [
+      { d: "M472 454c-44 15-75 58-75 112 0 75 53 121 115 121 63 0 116-46 116-121 0-56-31-98-76-112-19-6-39-4-56 6-7-5-15-7-24-6Z" },
+      { d: "M505 268v220", strokeWidth: 32 },
+      { d: "M334 357c24 64 83 107 171 122 88-15 147-58 171-122", strokeWidth: 30 },
+      { d: "M230 374c70 62 151 104 250 122", strokeWidth: 24 },
+      { d: "M794 374c-70 62-151 104-250 122", strokeWidth: 24 },
+    ],
   },
   pancreas: {
     label: "Pancreas",
-    path: "M394 828c54-34 160-46 234-28 42 10 57 42 31 65-35 31-147 33-243 8-52-13-56-24-22-45Z",
+    paths: [
+      { d: "M407 708c45-23 128-30 201-14 42 9 76 28 80 54 4 27-25 48-77 58-65 13-163 3-216-20-38-17-34-54 12-78Z" },
+      { d: "M536 650c35-10 79-4 103 17 19 17 14 46-9 56-31 14-91 7-120-12-30-20-17-49 26-61Z" },
+    ],
   },
   bones: {
     label: "Bones",
-    path:
-      "M512 130v350 M281 382c126 68 336 68 462 0 M267 483c146 78 344 78 490 0 M240 652c176 58 368 58 544 0 M358 1092c92 76 216 76 308 0 M385 1140l-82 478 M638 1140l82 478 M265 482L157 970 M759 482l108 488 M162 973l-86 115 M862 973l86 115 M260 1645c-76 34-135 52-203 76 M764 1645c76 34 135 52 203 76 M358 184c92-58 216-58 308 0 M326 287c122 82 250 82 372 0",
-    strokeWidth: 12,
+    paths: [
+      { d: "M398 104c68-46 160-46 228 0 44 30 67 74 67 125 0 92-74 166-181 166S331 321 331 229c0-51 23-95 67-125Z" },
+      { d: "M408 357h208c39 0 70 31 70 70v254c0 39-31 70-70 70H408c-39 0-70-31-70-70V427c0-39 31-70 70-70Z" },
+      { d: "M134 385c72 6 130 58 146 128l82 356c12 51-20 101-71 113-51 12-101-20-113-71L91 533c-17-74-1-127 43-148Z" },
+      { d: "M890 385c-72 6-130 58-146 128l-82 356c-12 51 20 101 71 113 51 12 101-20 113-71l87-378c17-74 1-127-43-148Z" },
+      { d: "M319 857c66-18 133 22 149 88l101 427c16 66-25 133-91 148-66 16-132-25-148-91l-101-427c-16-66 24-129 90-145Z" },
+      { d: "M705 857c-66-18-133 22-149 88l-101 427c-16 66 25 133 91 148 66 16 132-25 148-91l101-427c16-66-24-129-90-145Z" },
+      { d: "M246 1394h196c42 0 76 34 76 76v242c0 42-34 76-76 76H246c-42 0-76-34-76-76v-242c0-42 34-76 76-76Z" },
+      { d: "M582 1394h196c42 0 76 34 76 76v242c0 42-34 76-76 76H582c-42 0-76-34-76-76v-242c0-42 34-76 76-76Z" },
+    ],
   },
 };
 
@@ -33,7 +54,7 @@ function reportFocusOrgans() {
     .map((marker) => {
       const status = memberData.organStatus[marker.organ];
 
-      if (!status || status === "green" || !organPaths[marker.organ]) {
+      if (!status || status === "green" || !organMasks[marker.organ]) {
         return null;
       }
 
@@ -41,7 +62,7 @@ function reportFocusOrgans() {
         organ: marker.organ,
         status,
         color: statusStyles[status].fill,
-        ...organPaths[marker.organ],
+        ...organMasks[marker.organ],
       };
     })
     .filter(Boolean) as Array<{
@@ -49,8 +70,7 @@ function reportFocusOrgans() {
       status: StatusColor;
       color: string;
       label: string;
-      path: string;
-      strokeWidth?: number;
+      paths: OrganMaskPath[];
     }>;
 }
 
@@ -66,7 +86,7 @@ export function AnatomyBodyMap({
     <div className={`relative ${className}`}>
       <Image
         src={anatomyReportMap}
-        alt="Greyed anatomy body map with report-focused glowing organs"
+        alt="Greyed anatomy body map with report-focused organs"
         priority
         sizes="(max-width: 640px) 258px, 380px"
         className={`h-auto w-full select-none object-contain ${imageClassName}`}
@@ -79,33 +99,57 @@ export function AnatomyBodyMap({
       >
         <defs>
           {focusOrgans.map((organ) => (
-            <filter key={organ.organ} id={`organGlow-${organ.organ}`} x="-60%" y="-60%" width="220%" height="220%">
-              <feGaussianBlur stdDeviation={organ.organ === "bones" ? 8 : 24} result="blur" />
+            <mask key={organ.organ} id={`organMask-${organ.organ}`} maskUnits="userSpaceOnUse">
+              <rect width="1024" height="1792" fill="black" />
+              {organ.paths.map((path, index) => (
+                <path
+                  key={`${organ.organ}-${index}`}
+                  d={path.d}
+                  fill={path.strokeWidth ? "none" : "white"}
+                  stroke={path.strokeWidth ? "white" : "none"}
+                  strokeWidth={path.strokeWidth}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              ))}
+            </mask>
+          ))}
+          {focusOrgans.map((organ) => (
+            <filter key={`${organ.organ}-glow`} id={`organGlow-${organ.organ}`} x="-35%" y="-35%" width="170%" height="170%">
+              <feColorMatrix
+                in="SourceGraphic"
+                type="matrix"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -0.72 -0.72 -0.72 0 2.1"
+                result="cutout"
+              />
+              <feDropShadow
+                in="cutout"
+                dx="0"
+                dy="0"
+                stdDeviation={organ.organ === "bones" ? 7 : 11}
+                floodColor={organ.color}
+                floodOpacity={organ.status === "yellow" ? 0.42 : 0.48}
+                result="glow"
+              />
               <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
+                <feMergeNode in="glow" />
+                <feMergeNode in="cutout" />
               </feMerge>
             </filter>
           ))}
         </defs>
-        {focusOrgans.map((organ) => {
-          const isLine = organ.organ === "bones";
-
-          return (
-            <path
-              key={organ.organ}
-              d={organ.path}
-              fill={isLine ? "none" : organ.color}
-              stroke={organ.color}
-              strokeWidth={organ.strokeWidth ?? 8}
-              strokeLinecap="round"
-              strokeLinejoin="round"
+        {focusOrgans.map((organ) => (
+          <g key={organ.organ} className="anatomy-real-organ" mask={`url(#organMask-${organ.organ})`}>
+            <image
+              href={anatomyReportMap.src}
+              width="1024"
+              height="1792"
+              preserveAspectRatio="xMidYMid meet"
               filter={`url(#organGlow-${organ.organ})`}
-              className="anatomy-alert"
-              opacity={isLine ? 0.38 : 0.88}
+              style={{ mixBlendMode: "multiply" }}
             />
-          );
-        })}
+          </g>
+        ))}
       </svg>
       {focusOrgans.map((organ) => (
         <button
